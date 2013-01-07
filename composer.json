@@ -1,5 +1,5 @@
 {
-    "name": "mandango/mandango-behaviors",
+    "name": "yunait/mandango-behaviors",
     "description": "Bahaviors for Mandango, the Simple, powerful and ultrafast Object Document Mapper (ODM) for PHP and MongoDB",
     "homepage": "http://mandango.org/",
     "keywords": ["mandango","behaviors"],
