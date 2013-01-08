@@ -59,9 +59,11 @@ class Timestampable extends ClassExtension
     {
         // created
         if ($this->getOption('createdEnabled')) {
-            $fieldSetter = 'set'.ucfirst($this->getOption('createdField'));
+            $fieldSetter = 'set'.\Mandango\Twig\Mandango::toCamelCase($this->getOption('createdField'));
+            $fieldGetter = 'get'.\Mandango\Twig\Mandango::toCamelCase($this->getOption('createdField'));
 
             $method = new Method('protected', 'updateTimestampableCreated', '', <<<EOF
+        if ( \$this->$fieldGetter() !== null ) return true;
         \$this->$fieldSetter(new \DateTime());
 EOF
             );
@@ -70,9 +72,11 @@ EOF
 
         // updated
         if ($this->getOption('updatedEnabled')) {
-            $fieldSetter = 'set'.ucfirst($this->getOption('updatedField'));
+            $fieldSetter = 'set'.\Mandango\Twig\Mandango::toCamelCase($this->getOption('updatedField'));
+            $fieldGetter = 'get'.\Mandango\Twig\Mandango::toCamelCase($this->getOption('updatedField'));
 
             $method = new Method('protected', 'updateTimestampableUpdated', '', <<<EOF
+        if ( \$this->$fieldGetter() !== null ) return true;
         \$this->$fieldSetter(new \DateTime());
 EOF
             );

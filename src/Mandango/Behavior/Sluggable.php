@@ -69,8 +69,8 @@ class Sluggable extends ClassExtension
 
         // update slug
         $fromField = $this->getOption('fromField');
-        $fromFieldCamelized = ucfirst($fromField);
-        $slugFieldCamelized = ucfirst($slugField);
+        $fromFieldCamelized = \Mandango\Twig\Mandango::toCamelCase($fromField);
+        $slugFieldCamelized = \Mandango\Twig\Mandango::toCamelCase($slugField);
         $builder = var_export($this->getOption('builder'), true);
 
         $uniqueCode = '';
@@ -91,6 +91,7 @@ EOF;
         }
 
         $method = new Method('protected', 'updateSluggableSlug', '', <<<EOF
+        if ( \$this->get$slugFieldCamelized() !== null ) return true;
         \$slug = \$proposal = call_user_func($builder, \$this->get$fromFieldCamelized());
 
 $uniqueCode
@@ -102,7 +103,8 @@ EOF
 
         // repository ->findOneBySlug()
         $method = new Method('public', 'findOneBySlug', '$slug', <<<EOF
-        return \$this->createQuery(array('$slugField' => \$slug))->one();
+        if ( !\$slug || strlen(\$slug) == 0 ) throw new Exception('Argumento \$slug invalido.');
+        return \$this->mergeCriteria(array('$slugField' => (string)\$slug));
 EOF
         );
         $method->setDocComment(<<<EOF
@@ -115,6 +117,6 @@ EOF
      */
 EOF
         );
-        $this->definitions['repository_base']->addMethod($method);
+        $this->definitions['query_base']->addMethod($method);
     }
 }
