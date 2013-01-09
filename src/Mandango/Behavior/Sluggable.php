@@ -42,7 +42,10 @@ class Sluggable extends ClassExtension
     protected function doConfigClassProcess()
     {
         // field
-        $this->configClass['fields'][$this->getOption('slugField')] = 'string';
+        if ( !isset($this->configClass['fields'][$this->getOption('slugField')]) ) {
+            $this->configClass['fields'][$this->getOption('slugField')] = 'string';
+        } 
+        
 
         // index
         if ($this->getOption('unique')) {
@@ -92,6 +95,8 @@ EOF;
 
         $method = new Method('protected', 'updateSluggableSlug', '', <<<EOF
         if ( \$this->get$slugFieldCamelized() !== null ) return true;
+        if ( \$this->get$fromFieldCamelized() === null ) return true;
+
         \$slug = \$proposal = call_user_func($builder, \$this->get$fromFieldCamelized());
 
 $uniqueCode

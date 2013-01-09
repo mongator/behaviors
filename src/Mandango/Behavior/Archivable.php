@@ -29,11 +29,12 @@ class Archivable extends ClassExtension
     {
         $this->addOptions(array(
             'archive_class'     => '%class%Archive',
-            'id_field'          => 'documentId',
-            'archived_at_field' => 'archivedAt',
+            'collection_class'  => '%collection%Archive',
+            'id_field'          => 'document',
+            'archived_at_field' => 'archived',
             'archive_on_insert' => false,
             'archive_on_update' => false,
-            'archive_on_delete' => false,
+            'archive_on_delete' => true,
         ));
     }
 
@@ -52,6 +53,7 @@ class Archivable extends ClassExtension
     private function getArchiveConfigClass()
     {
         return array(
+            'collection' => $this->getCollection(),
             'archive' => true,
             'archive_from' => $this->class,
             'output' => isset($this->configClass['output'])
@@ -65,10 +67,16 @@ class Archivable extends ClassExtension
                                 ? $this->configClass['fields']
                                 : array(),
                             array(
-                                $this->getOption('id_field')          => 'string',
+                                $this->getOption('id_field')          => 'raw',
                                 $this->getOption('archived_at_field') => 'date',
                             )
                         ),
+            'embeddedsOne'  => isset($this->configClass['embeddedsOne'])
+                              ? $this->configClass['embeddedsOne']
+                              : array(),
+            'embeddedsMany' => isset($this->configClass['embeddedsMany'])
+                              ? $this->configClass['embeddedsMany']
+                              : array(),
             'referencesOne'  => isset($this->configClass['referencesOne'])
                               ? $this->configClass['referencesOne']
                               : array(),
@@ -121,6 +129,11 @@ class Archivable extends ClassExtension
     public function getArchiveClass()
     {
         return str_replace('%class%', $this->class, $this->getOption('archive_class'));
+    }
+
+    public function getCollection()
+    {
+        return str_replace('%collection%', $this->configClass['collection'], $this->getOption('collection_class'));
     }
 
     private function isArchive()

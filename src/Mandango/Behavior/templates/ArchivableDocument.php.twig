@@ -11,6 +11,22 @@
         $archive->set{{ field|ucfirst }}($this->get{{ field|ucfirst }}());
 {% endfor %}
 
+{% for name, embedded in config_class.embeddedsMany %}
+{% if embedded.inherited is not defined or not embedded.inherited %}
+        foreach($this->get{{ name|ucfirst }}() as $key => $document) {
+            $archive->add{{ name|ucfirst }}(clone $document);
+        }
+{% endif %}
+{% endfor %}
+
+{% for name, embedded in config_class.embeddedsOne %}
+{% if embedded.inherited is not defined or not embedded.inherited %}
+        if ( $document = $this->get{{ name|ucfirst }}() ) {
+            $archive->set{{ name|ucfirst }}(clone $document);
+        }
+{% endif %}
+{% endfor %}
+
         $archive->save();
 
         return $archive;

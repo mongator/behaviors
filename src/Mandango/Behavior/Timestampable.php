@@ -41,13 +41,17 @@ class Timestampable extends ClassExtension
     {
         // created
         if ($this->getOption('createdEnabled')) {
-            $this->configClass['fields'][$this->getOption('createdField')] = 'date';
+            if ( !isset($this->configClass['fields'][$this->getOption('createdField')]) ) {
+                $this->configClass['fields'][$this->getOption('createdField')] = 'date';
+            }
             $this->configClass['events']['preInsert'][] = 'updateTimestampableCreated';
         }
 
         // updated
         if ($this->getOption('updatedEnabled')) {
-            $this->configClass['fields'][$this->getOption('updatedField')] = 'date';
+            if ( !isset($this->configClass['fields'][$this->getOption('updatedField')]) ) {
+                $this->configClass['fields'][$this->getOption('updatedField')] = 'date';
+            }
             $this->configClass['events']['preUpdate'][] = 'updateTimestampableUpdated';
         }
     }
