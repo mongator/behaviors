@@ -28,7 +28,7 @@ class Archivable extends ClassExtension
     protected function setUp()
     {
         $this->addOptions(array(
-            'archive_class'     => '%class%Archive',
+            'archive_class'     => '%class\\%Archive',
             'collection_class'  => '%collection%Archive',
             'id_field'          => 'document',
             'archived_at_field' => 'archived',
