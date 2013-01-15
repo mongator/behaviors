@@ -1,0 +1,8 @@
+<?php
+
+
+    protected function createAutoIncrementableSequences()
+    {
+        $counterRepository = $this->getMandango()->getRepository('{{ options.counterClass }}');
+        return $counterRepository->setSequence('{{ options.counterName }}');
+    }

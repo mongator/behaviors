@@ -1,0 +1,24 @@
+<?php
+
+
+    public function getNextSequence($name)
+    {
+        $result = $this->getCollection()
+        ->findAndModify(
+            array('name' => $name), 
+            array('$inc' => array('sequence' => 1)),
+            null,
+            array('new' => true)
+        );
+        
+        if ( isset($result['sequence']) )  return $result['sequence'];
+        else return false;
+    }
+
+    public function setSequence($name, $sequence = 0)
+    {
+        $sequence = $this->create();
+        $sequence->setName($name);
+        $sequence->setSequence($sequence);
+        return $sequence->save();
+    }

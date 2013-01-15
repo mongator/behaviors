@@ -1,0 +1,10 @@
+<?php
+
+    protected function updateAutoIncrementableFields()
+    {
+        $counterRepository = $this->getMandango()->getRepository('{{ options.counterClass }}');
+        if ( !$value = $this->get{{ options.counterField|ucfirst }}() ) {
+            $value = $counterRepository->getNextSequence('{{ options.counterName }}');
+            $this->set{{ options.counterField|ucfirst }}($value);
+        }
+    }
