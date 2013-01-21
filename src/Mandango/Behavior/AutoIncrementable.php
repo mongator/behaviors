@@ -33,7 +33,7 @@ class AutoIncrementable extends ClassExtension
     protected function doNewConfigClassesProcess()
     {
         if ( $this->isCounter() ) return;
-
+        if ( isset($this->newConfigClasses[$this->getOption('counterClass')]) ) return;
         $this->newConfigClasses[$this->getOption('counterClass')] = $this->getCounterConfigClass();
     }
 

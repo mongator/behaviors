@@ -72,8 +72,8 @@ class Sluggable extends ClassExtension
 
         // update slug
         $fromField = $this->getOption('fromField');
-        $fromFieldCamelized = \Mandango\Twig\Mandango::toCamelCase($fromField);
-        $slugFieldCamelized = \Mandango\Twig\Mandango::toCamelCase($slugField);
+        $fromFieldCamelized = ucfirst($fromField);
+        $slugFieldCamelized = ucfirst($slugField);
         $builder = var_export($this->getOption('builder'), true);
 
         $uniqueCode = '';
