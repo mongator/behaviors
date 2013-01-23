@@ -11,7 +11,7 @@
             array('new' => true)
         );
         
-        if ( isset($result['sequence']) )  return $result['sequence'];
+        if ( isset($result['sequence']) )  return (int)$result['sequence'];
         else return false;
     }
 
