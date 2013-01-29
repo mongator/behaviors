@@ -15,10 +15,10 @@
         else return false;
     }
 
-    public function setSequence($name, $sequence = 0)
+    public function setSequence($name, $value = 0)
     {
         $sequence = $this->create();
         $sequence->setName($name);
-        $sequence->setSequence($sequence);
+        $sequence->setSequence($value);
         return $sequence->save();
     }
