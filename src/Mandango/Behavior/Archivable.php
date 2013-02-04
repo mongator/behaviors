@@ -35,6 +35,7 @@ class Archivable extends ClassExtension
             'archive_on_insert' => false,
             'archive_on_update' => false,
             'archive_on_delete' => true,
+            'fields'            => array()
         ));
     }
 
@@ -69,7 +70,9 @@ class Archivable extends ClassExtension
                             array(
                                 $this->getOption('id_field')          => 'raw',
                                 $this->getOption('archived_at_field') => 'date',
-                            )
+                            ),
+                             $this->getOption('fields')
+
                         ),
             'embeddedsOne'  => isset($this->configClass['embeddedsOne'])
                               ? $this->configClass['embeddedsOne']

@@ -1,9 +1,17 @@
 <?php
 
+
     public function archive()
     {
-        $archive = $this->getMandango()->create('{{ extension.archiveClass }}');
+        $archive = $this->createArchiveObject();
+        $this->copyContentOn($archive);
+        
+        $archive->save();
+        return $archive;
+    }
 
+    protected function copyContentOn($archive)
+    {
         $archive->set{{ options.id_field }}($this->getId());
         $archive->set{{ options.archived_at_field }}(new \DateTime());
 
@@ -27,7 +35,11 @@
 {% endif %}
 {% endfor %}
 
-        $archive->save();
-
         return $archive;
     }
+
+    protected function createArchiveObject()
+    {
+        return $this->getMandango()->create('{{ extension.archiveClass }}');
+    }
+
