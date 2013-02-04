@@ -1,6 +1,11 @@
 <?php
 
 
+    public function getSequence($name)
+    {
+        return $this->createQuery(array('name' => (string)$name))->one();
+    }
+
     public function getNextSequence($name)
     {
         $result = $this->getCollection()
@@ -17,7 +22,10 @@
 
     public function setSequence($name, $value = 0)
     {
-        $sequence = $this->create();
+        if ( !$sequence = $this->getSequence($name) ) {
+            $sequence = $this->create();
+        }
+        
         $sequence->setName($name);
         $sequence->setSequence($value);
         return $sequence->save();
