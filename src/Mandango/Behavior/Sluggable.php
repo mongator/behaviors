@@ -106,9 +106,8 @@ EOF
         );
         $this->definitions['document_base']->addMethod($method);
 
-        // repository ->findOneBySlug()
-        $method = new Method('public', 'findOneBySlug', '$slug', <<<EOF
-        if ( !\$slug || strlen(\$slug) == 0 ) throw new Exception('Argumento \$slug invalido.');
+        $method = new Method('public', 'findBySlug', '$slug', <<<EOF
+        if ( !\$slug || strlen(\$slug) == 0 ) throw new Exception('Invalid argument: \$slug.');
         return \$this->mergeCriteria(array('$slugField' => (string)\$slug));
 EOF
         );
