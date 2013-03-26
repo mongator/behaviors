@@ -22,6 +22,7 @@ class AutoIncrementable extends ClassExtension
         $this->addOptions(array(
             'counterName' => null,
             'counterField' => null,
+            'step' => 2,
             'collection' => 'counters',
             'counterClass' => 'Core\Models\Counter'
         ));
