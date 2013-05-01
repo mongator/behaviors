@@ -17,7 +17,8 @@ use Mandango\Twig\Mandango as MandangoTwig;
 
 /**
  * Archivable.
- *
+ * 
+ * @author Máximo Cuadros <maximo@yunait.com>
  * @author Pablo Díez <pablodip@gmail.com>
  */
 class Archivable extends ClassExtension
