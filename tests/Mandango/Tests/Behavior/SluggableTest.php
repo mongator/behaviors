@@ -43,7 +43,7 @@ class SluggableTest extends TestCase
 
         $repository = $this->mandango->getRepository('Model\Sluggable');
 
-        $this->assertSame($documents[3], $repository->findBySlug($documents[3]->getSlug())->one());
-        $this->assertSame($documents[6], $repository->findBySlug($documents[6]->getSlug())->one());
+        $this->assertSame($documents[3], $repository->findOneBySlug($documents[3]->getSlug()));
+        $this->assertSame($documents[6], $repository->findOneBySlug($documents[6]->getSlug()));
     }
 }
