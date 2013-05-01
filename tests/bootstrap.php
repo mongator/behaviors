@@ -1,6 +1,6 @@
 <?php
 
-$loader = require __DIR__.'/../vendor/.composer/autoload.php';
+$loader = require __DIR__.'/../vendor/autoload.php';
 $loader->add('Mandango\\Tests', __DIR__);
 $loader->add('Model', __DIR__);
 
@@ -14,8 +14,8 @@ $mondator->setConfigClasses($configClasses);
 $mondator->setExtensions(array(
     new Mandango\Extension\Core(array(
         'metadata_factory_class'  => 'Model\Mapping\MetadataFactory',
-        'metadata_factory_output' => __DIR__.'/Model/Mapping',
-        'default_output'          => __DIR__.'/Model',
+        'metadata_factory_output' => __DIR__,
+        'default_output'          => __DIR__,
     )),
 ));
 $mondator->process();
