@@ -42,14 +42,14 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $this->connection = static::$staticConnection;
 
         if (!static::$staticMandango) {
-            static::$staticMandango = new Mandango(new $this->metadataFactoryClass, new ArrayCache(), function($log) {});
+            static::$staticMandango = new Mandango(new $this->metadataFactoryClass, function($log) {});
             static::$staticMandango->setConnection('default', $this->connection);
             static::$staticMandango->setDefaultConnectionName('default');
         }
         $this->mandango = static::$staticMandango;
         $this->unitOfWork = $this->mandango->getUnitOfWork();
         $this->metadataFactory = $this->mandango->getMetadataFactory();
-        $this->cache = $this->mandango->getCache();
+        $this->cache = $this->mandango->getFieldsCache();
 
         foreach ($this->mandango->getAllRepositories() as $repository) {
             $repository->getIdentityMap()->clear();
