@@ -23,14 +23,14 @@ class ArchivableTest extends TestCase
 
         $archive = $model->archive();
 
-        $this->assertInstanceOf('Model\ArchivableArchive', $archive);
+        $this->assertInstanceOf('Model\Archivable\Archive', $archive);
         $this->assertFalse($archive->isNew());
-        $this->assertEquals($model->getId(), $archive->getDocumentId());
-        $this->assertNotNull($archive->getArchivedAt());
+        $this->assertEquals($model->getId(), $archive->getDocument());
+        $this->assertNotNull($archive->getArchived());
         $this->assertSame('foo', $archive->getTitle());
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\ArchivableArchive');
+        $archiveRepository = $this->mandango->getRepository('Model\Archivable\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(1, $archiveRepository->count());
@@ -49,7 +49,7 @@ class ArchivableTest extends TestCase
         $archive = $model->archive();
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\ArchivableReferenceArchive');
+        $archiveRepository = $this->mandango->getRepository('Model\ArchivableReference\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(1, $archiveRepository->count());
@@ -62,7 +62,7 @@ class ArchivableTest extends TestCase
             ->save();
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\ArchivableInsertArchive');
+        $archiveRepository = $this->mandango->getRepository('Model\ArchivableInsert\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(1, $archiveRepository->count());
@@ -79,7 +79,7 @@ class ArchivableTest extends TestCase
             ->save();
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\ArchivableUpdateArchive');
+        $archiveRepository = $this->mandango->getRepository('Model\ArchivableUpdate\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(0, $archiveRepository->count());
@@ -101,7 +101,7 @@ class ArchivableTest extends TestCase
             ->save();
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\ArchivableDeleteArchive');
+        $archiveRepository = $this->mandango->getRepository('Model\ArchivableDelete\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(0, $archiveRepository->count());

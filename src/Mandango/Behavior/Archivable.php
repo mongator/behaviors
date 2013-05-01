@@ -54,7 +54,7 @@ class Archivable extends ClassExtension
     private function getArchiveConfigClass()
     {
         return array(
-            'collection' => $this->getCollection(),
+            'collection' => $this->getCollection() ? $this->getCollection() : null,
             'archive' => true,
             'archive_from' => $this->class,
             'output' => isset($this->configClass['output'])
@@ -136,6 +136,7 @@ class Archivable extends ClassExtension
 
     public function getCollection()
     {
+        if ( !isset($this->configClass['collection']) ) return false;
         return str_replace('%collection%', $this->configClass['collection'], $this->getOption('collection_class'));
     }
 
