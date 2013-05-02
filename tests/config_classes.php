@@ -12,7 +12,7 @@ return array(
             'title' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Hashable'),
+            array('class' => 'Mandango\Behavior\Tokenizable'),
             array('class' => 'Mandango\Behavior\Archivable'),
         ),
     ),
@@ -60,29 +60,29 @@ return array(
             )
         ),
     ),
-    // Hashable
-    'Model\Hashable' => array(
+    // Tokenizable
+    'Model\Tokenizable' => array(
         'fields' => array(
             'field' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Hashable',),
+            array('class' => 'Mandango\Behavior\Tokenizable',),
         ),
     ),
-    'Model\HashableField' => array(
+    'Model\TokenizableField' => array(
         'fields' => array(
             'field' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Hashable', 'options' => array('field' => 'anotherField')),
+            array('class' => 'Mandango\Behavior\Tokenizable', 'options' => array('field' => 'anotherField')),
         ),
     ),
-    'Model\HashableLength' => array(
+    'Model\TokenizableLength' => array(
         'fields' => array(
             'field' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Hashable', 'options' => array('length' => 5)),
+            array('class' => 'Mandango\Behavior\Tokenizable', 'options' => array('length' => 5)),
         ),
     ),
     // Ipable
@@ -178,4 +178,106 @@ return array(
             )
         ),
     ),
+    // Hashable
+    'Model\Hashable' => array(
+        'fields' => array(
+            'title' => 'string',
+            'content' => 'string'
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mandango\Behavior\Hashable'
+            )
+        ),
+    ),
+    'Model\HashableFields' => array(
+        'fields' => array(
+            'title' => 'string',
+            'content' => 'string'
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mandango\Behavior\Hashable',
+                'options' => array(
+                    'fromFields' => array(
+                        'title'
+                    ),
+                ),
+            )
+        ),
+    ),
+    'Model\HashableReferences' => array(
+        'fields' => array(
+            'title' => 'string',
+            'content' => 'string'
+        ),
+        'referencesOne' => array(
+            'refOne' => array('class' => 'Model\Hashable'),
+        ),
+        'referencesMany' => array(
+            'refMany' => array('class' => 'Model\Hashable'),
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mandango\Behavior\Hashable',
+            )
+        ),
+    ),
+    'Model\HashableEmbedded' => array(
+        'fields' => array(
+            'title' => 'string',
+            'content' => 'string'
+        ),
+        'embeddedsOne' => array(
+            'embOne' => array('class' => 'Model\Comment'),
+        ),
+        'embeddedsMany' => array(
+            'embMany' => array('class' => 'Model\Comment'),
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mandango\Behavior\Hashable'
+            )
+        ),
+    ),
+    'Model\HashableConfigured' => array(
+        'fields' => array(
+            'title' => 'string',
+            'content' => 'string'
+        ),
+        'referencesOne' => array(
+            'refOne' => array('class' => 'Model\Hashable'),
+        ),
+        'referencesMany' => array(
+            'refMany' => array('class' => 'Model\Hashable'),
+        ),
+        'embeddedsOne' => array(
+            'embOne' => array('class' => 'Model\Comment'),
+        ),
+        'embeddedsMany' => array(
+            'embMany' => array('class' => 'Model\Comment'),
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mandango\Behavior\Hashable',
+                'options' => array(
+                    'fromFields' => array(
+                        'title',
+                        'refOne_reference_field',
+                        'embMany'
+                    ),
+                ),
+            )
+        ),
+    ),
+    'Model\Comment' => array(
+        'isEmbedded' => true,
+        'fields' => array(
+            'title' => 'string',
+            'content' => 'string'
+        )
+    ),
 );
+
+
+

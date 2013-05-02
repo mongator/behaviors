@@ -11,6 +11,7 @@
 
 namespace Mandango\Behavior;
 
+use Mandango\Twig\Mandango as MandangoTwig;
 use Mandango\Mondator\ClassExtension;
 use Mandango\Mondator\Definition\Method;
 
@@ -27,8 +28,10 @@ class Hashable extends ClassExtension
     protected function setUp()
     {
         $this->addOptions(array(
+            'createdEnabled' => true,
+            'updatedEnabled' => true,
             'field'  => 'hash',
-            'length' => 10
+            'fromFields' => array()
         ));
     }
 
@@ -38,7 +41,14 @@ class Hashable extends ClassExtension
     protected function doConfigClassProcess()
     {
         $this->configClass['fields'][$this->getOption('field')] = 'string';
-        $this->configClass['events']['preInsert'][] = 'updateHashableHash';
+
+        if ($this->getOption('createdEnabled')) {
+            $this->configClass['events']['preInsert'][] = 'updateHashableHash';
+        }
+
+        if ($this->getOption('updatedEnabled')) {
+            $this->configClass['events']['preInsert'][] = 'updateHashableHash';
+        }
     }
 
     /**
@@ -47,31 +57,27 @@ class Hashable extends ClassExtension
     protected function doClassProcess()
     {
         $field = $this->getOption('field');
-        $length = $this->getOption('length');
+        $fromFields = $this->getOption('fromFields');
+        if ( count($fromFields) == 0 ) {
+            $fromFields = array_diff(
+                array_merge(
+                    array_keys($this->configClass['fields']),
+                    array_keys($this->configClass['embeddedsOne']),
+                    array_keys($this->configClass['embeddedsMany'])
+                ),
+                array($field)
+            );
+
+            $this->setOption('fromFields', $fromFields);
+        }
 
         // field
         $this->configClass['fields'][$field] = array('type' => 'string');
 
-        // index
-        $this->configClass['indexes'][] = array('keys' => array($field => 1), array('unique' => 1));
-
-        // event
-        $fieldSetter = 'set'.ucfirst($field);
-
-        $method = new Method('public', 'updateHashableHash', '', <<<EOF
-        do {
-            \$hash = '';
-            for (\$i = 1; \$i <= $length; \$i++) {
-                \$hash .= substr(sha1(microtime(true).mt_rand(111111, 999999)), mt_rand(0, 39), 1);
-            };
-
-            \$result = \$this->getRepository()->getCollection()->findOne(array('$field' => \$hash));
-        } while (\$result);
-
-        \$this->$fieldSetter(\$hash);
-EOF
+        // document ->updateHashableHash()
+        $this->processTemplate($this->definitions['document_base'],
+            file_get_contents(__DIR__.'/templates/HashableDocument.php.twig')
         );
-        $this->definitions['document_base']->addMethod($method);
 
         // repository ->findOneByHash()
         $method = new Method('public', 'findByHash', '$hash', <<<EOF
@@ -89,5 +95,10 @@ EOF
 EOF
         );
         $this->definitions['repository_base']->addMethod($method);
+    }
+
+    protected function configureTwig(\Twig_Environment $twig)
+    {
+        $twig->addExtension(new MandangoTwig());
     }
 }

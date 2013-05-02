@@ -1,0 +1,30 @@
+<?php
+
+    protected function updateHashableHash()
+    {
+        $values = array();
+
+{% for field in options.fromFields %}
+        $value = $this->get{{ field|ucfirst }}();
+{% if field in config_class.fields|keys %}
+        if ( is_array($value) ) sort($value);
+        $values[] = $value;
+
+{% elseif field in config_class.embeddedsMany|keys %}
+        foreach($value as $object) {
+            $array = $object->toArray();
+            ksort($array);
+            $values[] = $array;
+        }
+
+{% elseif field in config_class.embeddedsOne|keys %}
+        $array = $value->toArray();
+        ksort($array);
+        $values[] = $array;
+        
+{% endif %}
+{% endfor %}
+
+        $token = md5(serialize($values));
+        $this->set{{ options.field|ucfirst }}($token);
+    }
