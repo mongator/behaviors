@@ -1,7 +1,64 @@
-# Mandango Behaviors
+Mandango Behaviors [![Build Status](https://travis-ci.org/yunait/mandango-behaviors.png?branch=master)](https://travis-ci.org/yunait/mandango-behaviors)
+==============================
 
-Official Mandango behaviors.
+These are the official behaviors of Mandango.
 
-## Documentation
+- Timestampable: saves the creation and/or update date in the documents
+- Ipable: saves the IP from where documents are created and/or saved
+- Sluggable: saves the slug of a field in the documents
+- Archivable: Save a document copy from one collection to other
+- Tokenizable: Generate a token on creation
+- Hasable: Generate a hash for a given fields/rels/embs from the given document, on update and or creation
 
-See the documentation in [http://mandango.org/doc/](http://mandango.org/doc/)
+Requirements
+------------
+
+* PHP 5.3.x;
+* yunait/mandango
+
+
+Installation
+------------
+
+The recommended way to install Mandango Behaviors is [through composer](http://getcomposer.org).
+You can see [package information on Packagist.](https://packagist.org/packages/yunait/mandango-behaviors)
+
+```JSON
+{
+    "require": {
+        "yunait/mandango-behaviors": "dev"
+    }
+}
+```
+
+
+Examples
+--------
+On your document definition just add a new array named behaviors, just like this:
+
+```php
+'Model\MyCollecion' => array(
+    'fields' => array(
+        'title' => 'string',
+    ),
+    'behaviors' => array(
+        array('class' => 'Mandango\Behavior\Tokenizable'),
+        array('class' => 'Mandango\Behavior\Archivable'),
+    ),
+),
+```
+
+Tests
+-----
+
+Tests are in the `tests` folder.
+To run them, you need PHPUnit.
+Example:
+
+    $ phpunit --configuration phpunit.xml.dist
+
+
+License
+-------
+
+MIT, see [LICENSE](LICENSE)
