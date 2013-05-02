@@ -47,7 +47,7 @@ class Hashable extends ClassExtension
         }
 
         if ($this->getOption('updatedEnabled')) {
-            $this->configClass['events']['preInsert'][] = 'updateHashableHash';
+            $this->configClass['events']['preUpdate'][] = 'updateHashableHash';
         }
     }
 
