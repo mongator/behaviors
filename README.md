@@ -14,19 +14,19 @@ Requirements
 ------------
 
 * PHP 5.3.x;
-* yunait/mandango
+* mongator/mongator
 
 
 Installation
 ------------
 
 The recommended way to install Mongator Behaviors is [through composer](http://getcomposer.org).
-You can see [package information on Packagist.](https://packagist.org/packages/yunait/mandango-behaviors)
+You can see [package information on Packagist.](https://packagist.org/packages/mongator/behaviors)
 
 ```JSON
 {
     "require": {
-        "yunait/mandango-behaviors": "dev"
+        "mongator/behaviors": "dev"
     }
 }
 ```
