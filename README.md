@@ -1,4 +1,4 @@
-Mongator Behaviors [![Build Status](https://travis-ci.org/yunait/mandango-behaviors.png?branch=master)](https://travis-ci.org/mongator/behaviors)
+Mongator Behaviors [![Build Status](https://travis-ci.org/mongator/behaviors.png?branch=master)](https://travis-ci.org/mongator/behaviors)
 ==============================
 
 These are the official behaviors of Mongator.
