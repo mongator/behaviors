@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Pablo Díez <pablodip@gmail.com>
  *
@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Mandango\Behavior;
+namespace Mongator\Behavior;
 
 use Mandango\Mondator\ClassExtension;
 use Mandango\Mondator\Definition\Method;
-use Mandango\Twig\Mandango as MandangoTwig;
+use Mongator\Twig\Mongator as MongatorTwig;
 
 /**
  * Sortable.
@@ -65,6 +65,6 @@ class Sortable extends ClassExtension
 
     protected function configureTwig(\Twig_Environment $twig)
     {
-        $twig->addExtension(new MandangoTwig());
+        $twig->addExtension(new MongatorTwig());
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Pablo Díez <pablodip@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Mandango\Tests\Behavior;
+namespace Mongator\Tests\Behavior;
 
-use Mandango\Tests\TestCase;
+use Mongator\Tests\TestCase;
 
 class SortableTest extends TestCase
 {
@@ -180,8 +180,8 @@ class SortableTest extends TestCase
      */
     public function testDocumentSwapPositionDifferentClass()
     {
-        $sortable = $this->mandango->create('Model\Sortable');
-        $hashable = $this->mandango->create('Model\Hashable');
+        $sortable = $this->mongator->create('Model\Sortable');
+        $hashable = $this->mongator->create('Model\Hashable');
 
         $sortable->swapPosition($hashable);
     }
@@ -193,7 +193,7 @@ class SortableTest extends TestCase
     {
         $documents = $this->createDocuments(3);
 
-        $this->mandango->create('Model\Sortable')
+        $this->mongator->create('Model\Sortable')
             ->setName('foo')
             ->swapPosition($documents[2])
         ;
@@ -206,7 +206,7 @@ class SortableTest extends TestCase
     {
         $documents = $this->createDocuments(3);
 
-        $document = $this->mandango->create('Model\Sortable')->setName('foo');
+        $document = $this->mongator->create('Model\Sortable')->setName('foo');
         $documents[2]->swapPosition($document);
     }
 
@@ -389,7 +389,7 @@ class SortableTest extends TestCase
     public function testDocumentSortableSetPositionLowerThanMin($position)
     {
         $documents = $this->createDocuments(3);
-        $this->mandango->create('Model\Sortable')->setName('foo')->setPosition($position)->save();
+        $this->mongator->create('Model\Sortable')->setName('foo')->setPosition($position)->save();
     }
 
     public function documentSortableSetPositionLowerThanMinProvider()
@@ -406,7 +406,7 @@ class SortableTest extends TestCase
     public function testDocumentSortableSetPositionHigherThanMax()
     {
         $documents = $this->createDocuments(3);
-        $this->mandango->create('Model\Sortable')->setName('foo')->setPosition(5)->save();
+        $this->mongator->create('Model\Sortable')->setName('foo')->setPosition(5)->save();
     }
 
     public function testDocumentSortableSetPositionScope()
@@ -434,19 +434,19 @@ class SortableTest extends TestCase
 
     public function testDocumentSortableSetPositionScopeReference()
     {
-        $sortable1 = $this->mandango->create('Model\Sortable')->setName('foo')->save();
-        $sortable2 = $this->mandango->create('Model\Sortable')->setName('bar')->save();
+        $sortable1 = $this->mongator->create('Model\Sortable')->setName('foo')->save();
+        $sortable2 = $this->mongator->create('Model\Sortable')->setName('bar')->save();
 
         $documents = array();
         for ($i = 1; $i <= 3; $i++) {
-            $documents[$i] = $this->mandango->create('Model\SortableScopeReference')
+            $documents[$i] = $this->mongator->create('Model\SortableScopeReference')
                 ->setName('foo')
                 ->setSortable($sortable1)
                 ->save()
             ;
         }
         for ($i = 4; $i <= 5; $i++) {
-            $documents[$i] = $this->mandango->create('Model\SortableScopeReference')
+            $documents[$i] = $this->mongator->create('Model\SortableScopeReference')
                 ->setName('foo')
                 ->setSortable($sortable2)
                 ->save()
@@ -464,7 +464,7 @@ class SortableTest extends TestCase
     {
         $documents = array();
         for ($i = 1; $i <= 5; $i++) {
-            $documents[$i] = $this->mandango->create('Model\SortableSkip')
+            $documents[$i] = $this->mongator->create('Model\SortableSkip')
                 ->setName('foo')
                 ->setSkip($i % 2 ? false : true)
                 ->save()
@@ -507,7 +507,7 @@ class SortableTest extends TestCase
     public function testDocumentSortableSetPositionMoveDocumentsNew()
     {
         $documents = $this->createDocuments(5);
-        $documents[6] = $this->mandango->create('Model\Sortable')
+        $documents[6] = $this->mongator->create('Model\Sortable')
             ->setName('foo')
             ->setPosition(3)
             ->save()
@@ -528,7 +528,7 @@ class SortableTest extends TestCase
     public function testDocumentSortableSetPositionMoveDocumentsNewScope()
     {
         $documents = $this->createScopeDocuments(5);
-        $documents['foo'][6] = $this->mandango->create('Model\SortableScope')
+        $documents['foo'][6] = $this->mongator->create('Model\SortableScope')
             ->setType('foo')
             ->setName('ups')
             ->setPosition(3)
@@ -558,7 +558,7 @@ class SortableTest extends TestCase
     public function testDocumentSortableSetPositionMoveDocumentsNewInheritance()
     {
         $documents = $this->createDocumentsInheritance(array('child' => 3, 'parent' => 2));
-        $documents[6] = $this->mandango->create('Model\SortableChild')
+        $documents[6] = $this->mongator->create('Model\SortableChild')
             ->setName('foo')
             ->setPosition(3)
             ->save()
@@ -732,7 +732,7 @@ class SortableTest extends TestCase
     {
         $documents = array();
         for ($i = 1; $i <= 5; $i++) {
-            $documents[$i] = $this->mandango->create('Model\SortableSkip')
+            $documents[$i] = $this->mongator->create('Model\SortableSkip')
                 ->setName('foo')
                 ->setSkip($i % 2 ? false : true)
                 ->save()
@@ -770,13 +770,13 @@ class SortableTest extends TestCase
     public function testRepositoryGetMinPosition()
     {
         $documents = $this->createDocuments(5);
-        $this->assertSame(1, $this->mandango->getRepository('Model\Sortable')->getMinPosition());
+        $this->assertSame(1, $this->mongator->getRepository('Model\Sortable')->getMinPosition());
     }
 
     public function testRepositoryGetMinPositionScope()
     {
         $documents = $this->createScopeDocuments(5);
-        $repository = $this->mandango->getRepository('Model\SortableScope');
+        $repository = $this->mongator->getRepository('Model\SortableScope');
         $this->assertSame(1, $repository->getMinPosition(array('type' => 'foo')));
         $this->assertSame(1, $repository->getMinPosition(array('type' => 'bar')));
         $this->assertNull($repository->getMinPosition(array('type' => 'ups')));
@@ -785,7 +785,7 @@ class SortableTest extends TestCase
     public function testRepositoryGetMaxPosition()
     {
         $documents = $this->createDocuments(5);
-        $this->assertSame(5, $this->mandango->getRepository('Model\Sortable')->getMaxPosition());
+        $this->assertSame(5, $this->mongator->getRepository('Model\Sortable')->getMaxPosition());
     }
 
     public function testRepositoryGetMaxPositionScope()
@@ -793,7 +793,7 @@ class SortableTest extends TestCase
         $documents = $this->createScopeDocuments(5);
         $documents['foo'][5]->delete();
 
-        $repository = $this->mandango->getRepository('Model\SortableScope');
+        $repository = $this->mongator->getRepository('Model\SortableScope');
         $this->assertSame(4, $repository->getMaxPosition(array('type' => 'foo')));
         $this->assertSame(5, $repository->getMaxPosition(array('type' => 'bar')));
     }
@@ -802,12 +802,12 @@ class SortableTest extends TestCase
     {
         $documents = array();
         for ($i = 1; $i <= $nb; $i++) {
-            $documents[$i] = $this->mandango->create($top ? 'Model\SortableTop' : 'Model\Sortable')
+            $documents[$i] = $this->mongator->create($top ? 'Model\SortableTop' : 'Model\Sortable')
                 ->setName('sortable'.$i)
             ;
-            $this->mandango->persist($documents[$i]);
+            $this->mongator->persist($documents[$i]);
         }
-        $this->mandango->flush();
+        $this->mongator->flush();
 
         return $documents;
     }
@@ -818,14 +818,14 @@ class SortableTest extends TestCase
         foreach ($scopes as $type) {
             $documents[$type] = array();
             for ($i = 1; $i <= $nb; $i++) {
-                $documents[$type][$i] = $this->mandango->create('Model\SortableScope')
+                $documents[$type][$i] = $this->mongator->create('Model\SortableScope')
                     ->setType($type)
                     ->setName('sortable'.$i)
                 ;
-                $this->mandango->persist($documents[$type][$i]);
+                $this->mongator->persist($documents[$type][$i]);
             }
         }
-        $this->mandango->flush();
+        $this->mongator->flush();
 
         return $documents;
     }
@@ -837,11 +837,11 @@ class SortableTest extends TestCase
         foreach ($what as $type => $nb) {
             if ('parent' === $type) {
                 for ($i = 0; $i < $nb; $i++) {
-                    $documents[++$idx] = $this->mandango->create('Model\SortableParent')->setName('foo')->save();
+                    $documents[++$idx] = $this->mongator->create('Model\SortableParent')->setName('foo')->save();
                 }
             } elseif ('child' === $type) {
                 for ($i = 0; $i < $nb; $i++) {
-                    $documents[++$idx] = $this->mandango->create('Model\SortableChild')->setName('foo')->save();
+                    $documents[++$idx] = $this->mongator->create('Model\SortableChild')->setName('foo')->save();
                 }
             }
         }

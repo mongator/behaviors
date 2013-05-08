@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Pablo Díez <pablodip@gmail.com>
  *
@@ -11,13 +11,13 @@
 
 namespace Mondongo\Tests\Behavior;
 
-use Mandango\Tests\TestCase;
+use Mongator\Tests\TestCase;
 
 class ArchivableTest extends TestCase
 {
     public function testArchivable()
     {
-        $model = $this->mandango->create('Model\Archivable')
+        $model = $this->mongator->create('Model\Archivable')
             ->setTitle('foo')
             ->save();
 
@@ -30,7 +30,7 @@ class ArchivableTest extends TestCase
         $this->assertSame('foo', $archive->getTitle());
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\Archivable\Archive');
+        $archiveRepository = $this->mongator->getRepository('Model\Archivable\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(1, $archiveRepository->count());
@@ -38,18 +38,18 @@ class ArchivableTest extends TestCase
 
     public function testArchivableReference()
     {
-        $article = $this->mandango->create('Model\Article')
+        $article = $this->mongator->create('Model\Article')
             ->setTitle('foo')
             ->save();
 
-        $model = $this->mandango->create('Model\ArchivableReference')
+        $model = $this->mongator->create('Model\ArchivableReference')
             ->setArticle($article)
             ->save();
 
         $archive = $model->archive();
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\ArchivableReference\Archive');
+        $archiveRepository = $this->mongator->getRepository('Model\ArchivableReference\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(1, $archiveRepository->count());
@@ -57,12 +57,12 @@ class ArchivableTest extends TestCase
 
     public function testArchiveInsert()
     {
-        $model = $this->mandango->create('Model\ArchivableInsert')
+        $model = $this->mongator->create('Model\ArchivableInsert')
             ->setTitle('foo')
             ->save();
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\ArchivableInsert\Archive');
+        $archiveRepository = $this->mongator->getRepository('Model\ArchivableInsert\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(1, $archiveRepository->count());
@@ -74,12 +74,12 @@ class ArchivableTest extends TestCase
 
     public function testArchiveUpdate()
     {
-        $model = $this->mandango->create('Model\ArchivableUpdate')
+        $model = $this->mongator->create('Model\ArchivableUpdate')
             ->setTitle('foo')
             ->save();
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\ArchivableUpdate\Archive');
+        $archiveRepository = $this->mongator->getRepository('Model\ArchivableUpdate\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(0, $archiveRepository->count());
@@ -96,12 +96,12 @@ class ArchivableTest extends TestCase
 
     public function testArchiveDelete()
     {
-        $model = $this->mandango->create('Model\ArchivableDelete')
+        $model = $this->mongator->create('Model\ArchivableDelete')
             ->setTitle('foo')
             ->save();
 
         $repository = $model->getRepository();
-        $archiveRepository = $this->mandango->getRepository('Model\ArchivableDelete\Archive');
+        $archiveRepository = $this->mongator->getRepository('Model\ArchivableDelete\Archive');
 
         $this->assertSame(1, $repository->count());
         $this->assertSame(0, $archiveRepository->count());

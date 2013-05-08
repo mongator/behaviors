@@ -1,7 +1,7 @@
-Mandango Behaviors [![Build Status](https://travis-ci.org/yunait/mandango-behaviors.png?branch=master)](https://travis-ci.org/yunait/mandango-behaviors)
+Mongator Behaviors [![Build Status](https://travis-ci.org/yunait/mandango-behaviors.png?branch=master)](https://travis-ci.org/mongator/behaviors)
 ==============================
 
-These are the official behaviors of Mandango.
+These are the official behaviors of Mongator.
 
 - Timestampable: saves the creation and/or update date in the documents
 - Ipable: saves the IP from where documents are created and/or saved
@@ -20,7 +20,7 @@ Requirements
 Installation
 ------------
 
-The recommended way to install Mandango Behaviors is [through composer](http://getcomposer.org).
+The recommended way to install Mongator Behaviors is [through composer](http://getcomposer.org).
 You can see [package information on Packagist.](https://packagist.org/packages/yunait/mandango-behaviors)
 
 ```JSON
@@ -42,8 +42,8 @@ On your document definition just add a new array named behaviors, just like this
         'title' => 'string',
     ),
     'behaviors' => array(
-        array('class' => 'Mandango\Behavior\Tokenizable'),
-        array('class' => 'Mandango\Behavior\Archivable'),
+        array('class' => 'Mongator\Behavior\Tokenizable'),
+        array('class' => 'Mongator\Behavior\Archivable'),
     ),
 ),
 ```

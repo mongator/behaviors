@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Pablo Díez <pablodip@gmail.com>
  *
@@ -9,15 +9,15 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Mandango\Tests\Behavior;
+namespace Mongator\Tests\Behavior;
 
-use Mandango\Tests\TestCase;
+use Mongator\Tests\TestCase;
 
 class TimestampableTest extends TestCase
 {
     public function testTimestampable()
     {
-        $document = $this->mandango->create('Model\Timestampable');
+        $document = $this->mongator->create('Model\Timestampable');
         $document->setField('foo');
         $document->save();
 

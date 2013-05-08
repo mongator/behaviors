@@ -1,9 +1,9 @@
 <?php
-namespace Mandango\Behavior;
+namespace Mongator\Behavior;
 
 use Mandango\Mondator\ClassExtension;
 use Mandango\Mondator\Definition\Method;
-use Mandango\Twig\Mandango as MandangoTwig;
+use Mongator\Twig\Mongator as MongatorTwig;
 
 /**
  * Archivable.
@@ -100,7 +100,7 @@ class AutoIncrementable extends ClassExtension
                 )
             ),
             'behaviors' => array(
-                array('class' => 'Mandango\Behavior\AutoIncrementable'),
+                array('class' => 'Mongator\Behavior\AutoIncrementable'),
             ),
         );
     }
@@ -113,6 +113,6 @@ class AutoIncrementable extends ClassExtension
 
     protected function configureTwig(\Twig_Environment $twig)
     {
-        $twig->addExtension(new MandangoTwig());
+        $twig->addExtension(new MongatorTwig());
     }
 }

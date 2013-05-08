@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Pablo Díez <pablodip@gmail.com>
  *
@@ -11,13 +11,13 @@
 
 namespace Mondongo\Tests\Behavior;
 
-use Mandango\Tests\TestCase;
+use Mongator\Tests\TestCase;
 
 class TokenizableTest extends TestCase
 {
     public function testTokenizable()
     {
-        $document = $this->mandango->create('Model\Tokenizable');
+        $document = $this->mongator->create('Model\Tokenizable');
         $document->setField('foo');
         $document->save();
 
@@ -27,11 +27,11 @@ class TokenizableTest extends TestCase
 
     public function testRepositoryFindOneByToken()
     {
-        $repository = $this->mandango->getRepository('Model\Tokenizable');
+        $repository = $this->mongator->getRepository('Model\Tokenizable');
 
         $documents = array();
         for ($i = 0; $i < 9; $i++) {
-            $documents[] = $document = $this->mandango->create('Model\Tokenizable');
+            $documents[] = $document = $this->mongator->create('Model\Tokenizable');
             $document->setField('foo'.$i);
         }
         $repository->save($documents);
@@ -42,7 +42,7 @@ class TokenizableTest extends TestCase
 
     public function testField()
     {
-        $document = $this->mandango->create('Model\TokenizableField');
+        $document = $this->mongator->create('Model\TokenizableField');
         $document->setField('foo');
         $document->save();
 
@@ -52,7 +52,7 @@ class TokenizableTest extends TestCase
 
     public function testLength()
     {
-        $document = $this->mandango->create('Model\TokenizableLength');
+        $document = $this->mongator->create('Model\TokenizableLength');
         $document->setField('foo');
         $document->save();
 

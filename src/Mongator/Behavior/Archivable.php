@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Pablo Díez <pablodip@gmail.com>
  *
@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Mandango\Behavior;
+namespace Mongator\Behavior;
 
 use Mandango\Mondator\ClassExtension;
 use Mandango\Mondator\Definition\Method;
-use Mandango\Twig\Mandango as MandangoTwig;
+use Mongator\Twig\Mongator as MongatorTwig;
 
 /**
  * Archivable.
@@ -88,7 +88,7 @@ class Archivable extends ClassExtension
                               ? $this->configClass['referencesMany']
                               : array(),
             'behaviors' => array(
-                array('class' => 'Mandango\Behavior\Archivable'),
+                array('class' => 'Mongator\Behavior\Archivable'),
             ),
         );
     }
@@ -159,6 +159,6 @@ class Archivable extends ClassExtension
 
     protected function configureTwig(\Twig_Environment $twig)
     {
-        $twig->addExtension(new MandangoTwig());
+        $twig->addExtension(new MongatorTwig());
     }
 }

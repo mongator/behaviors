@@ -12,8 +12,8 @@ return array(
             'title' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Tokenizable'),
-            array('class' => 'Mandango\Behavior\Archivable'),
+            array('class' => 'Mongator\Behavior\Tokenizable'),
+            array('class' => 'Mongator\Behavior\Archivable'),
         ),
     ),
     'Model\ArchivableReference' => array(
@@ -24,7 +24,7 @@ return array(
             'article' => array('class' => 'Model\Article'),
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Archivable')
+            array('class' => 'Mongator\Behavior\Archivable')
         ),
     ),
     'Model\ArchivableInsert' => array(
@@ -33,7 +33,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class'   => 'Mandango\Behavior\Archivable',
+                'class'   => 'Mongator\Behavior\Archivable',
                 'options' => array('archive_on_insert' => true),
             )
         ),
@@ -44,7 +44,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class'   => 'Mandango\Behavior\Archivable',
+                'class'   => 'Mongator\Behavior\Archivable',
                 'options' => array('archive_on_update' => true),
             )
         ),
@@ -55,7 +55,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class'   => 'Mandango\Behavior\Archivable',
+                'class'   => 'Mongator\Behavior\Archivable',
                 'options' => array('archive_on_delete' => true),
             )
         ),
@@ -66,7 +66,7 @@ return array(
             'field' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Tokenizable',),
+            array('class' => 'Mongator\Behavior\Tokenizable',),
         ),
     ),
     'Model\TokenizableField' => array(
@@ -74,7 +74,7 @@ return array(
             'field' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Tokenizable', 'options' => array('field' => 'anotherField')),
+            array('class' => 'Mongator\Behavior\Tokenizable', 'options' => array('field' => 'anotherField')),
         ),
     ),
     'Model\TokenizableLength' => array(
@@ -82,7 +82,7 @@ return array(
             'field' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Tokenizable', 'options' => array('length' => 5)),
+            array('class' => 'Mongator\Behavior\Tokenizable', 'options' => array('length' => 5)),
         ),
     ),
     // Ipable
@@ -92,7 +92,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class' => 'Mandango\Behavior\Ipable',
+                'class' => 'Mongator\Behavior\Ipable',
             ),
         ),
     ),
@@ -103,7 +103,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class'   => 'Mandango\Behavior\Sluggable',
+                'class'   => 'Mongator\Behavior\Sluggable',
                 'options' => array(
                     'fromField' => 'title',
                 ),
@@ -116,7 +116,7 @@ return array(
             'name' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Sortable'),
+            array('class' => 'Mongator\Behavior\Sortable'),
         ),
     ),
     'Model\SortableTop' => array(
@@ -124,7 +124,7 @@ return array(
             'name' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Sortable', 'options' => array('new_position' => 'top')),
+            array('class' => 'Mongator\Behavior\Sortable', 'options' => array('new_position' => 'top')),
         ),
     ),
     'Model\SortableScope' => array(
@@ -133,7 +133,7 @@ return array(
             'name' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Sortable', 'options' => array('scope' => array('type'))),
+            array('class' => 'Mongator\Behavior\Sortable', 'options' => array('scope' => array('type'))),
         ),
     ),
     'Model\SortableScopeReference' => array(
@@ -144,7 +144,7 @@ return array(
             'sortable' => array('class' => 'Model\Sortable'),
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Sortable', 'options' => array('scope' => array('sortable'))),
+            array('class' => 'Mongator\Behavior\Sortable', 'options' => array('scope' => array('sortable'))),
         ),
     ),
     'Model\SortableSkip' => array(
@@ -152,7 +152,7 @@ return array(
             'name' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Sortable'),
+            array('class' => 'Mongator\Behavior\Sortable'),
         ),
     ),
     'Model\SortableParent' => array(
@@ -161,7 +161,7 @@ return array(
             'name' => 'string',
         ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Sortable'),
+            array('class' => 'Mongator\Behavior\Sortable'),
         ),
     ),
     'Model\SortableChild' => array(
@@ -174,7 +174,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class' => 'Mandango\Behavior\Timestampable',
+                'class' => 'Mongator\Behavior\Timestampable',
             )
         ),
     ),
@@ -186,7 +186,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class' => 'Mandango\Behavior\Hashable'
+                'class' => 'Mongator\Behavior\Hashable'
             )
         ),
     ),
@@ -197,7 +197,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class' => 'Mandango\Behavior\Hashable',
+                'class' => 'Mongator\Behavior\Hashable',
                 'options' => array(
                     'fromFields' => array(
                         'title'
@@ -219,7 +219,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class' => 'Mandango\Behavior\Hashable',
+                'class' => 'Mongator\Behavior\Hashable',
             )
         ),
     ),
@@ -236,7 +236,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class' => 'Mandango\Behavior\Hashable'
+                'class' => 'Mongator\Behavior\Hashable'
             )
         ),
     ),
@@ -259,7 +259,7 @@ return array(
         ),
         'behaviors' => array(
             array(
-                'class' => 'Mandango\Behavior\Hashable',
+                'class' => 'Mongator\Behavior\Hashable',
                 'options' => array(
                     'fromFields' => array(
                         'title',

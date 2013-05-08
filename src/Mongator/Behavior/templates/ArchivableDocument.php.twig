@@ -40,6 +40,6 @@
 
     protected function createArchiveObject()
     {
-        return $this->getMandango()->create('{{ extension.archiveClass }}');
+        return $this->getMongator()->create('{{ extension.archiveClass }}');
     }
 

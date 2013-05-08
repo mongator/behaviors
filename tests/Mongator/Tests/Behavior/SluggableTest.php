@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Pablo Díez <pablodip@gmail.com>
  *
@@ -11,7 +11,7 @@
 
 namespace Mondongo\Tests\Behavior;
 
-use Mandango\Tests\TestCase;
+use Mongator\Tests\TestCase;
 
 class SluggableTest extends TestCase
 {
@@ -19,13 +19,13 @@ class SluggableTest extends TestCase
     {
         $documents = array();
 
-        $documents[1] = $this->mandango->create('Model\Sluggable');
+        $documents[1] = $this->mongator->create('Model\Sluggable');
         $documents[1]->setTitle(' Testing Sluggable Extensión ');
         $documents[1]->save();
 
         $this->assertSame('testing-sluggable-extension', $documents[1]->getSlug());
 
-        $documents[2] = $this->mandango->create('Model\Sluggable');
+        $documents[2] = $this->mongator->create('Model\Sluggable');
         $documents[2]->setTitle(' Testing Sluggable Extensión ');
         $documents[2]->save();
 
@@ -36,12 +36,12 @@ class SluggableTest extends TestCase
     {
         $documents = array();
         for ($i = 0; $i < 9; $i++) {
-            $documents[$i] = $document = $this->mandango->create('Model\Sluggable');
+            $documents[$i] = $document = $this->mongator->create('Model\Sluggable');
             $document->setTitle('foo');
             $document->save();
         }
 
-        $repository = $this->mandango->getRepository('Model\Sluggable');
+        $repository = $this->mongator->getRepository('Model\Sluggable');
 
         $this->assertSame($documents[3], $repository->findOneBySlug($documents[3]->getSlug()));
         $this->assertSame($documents[6], $repository->findOneBySlug($documents[6]->getSlug()));

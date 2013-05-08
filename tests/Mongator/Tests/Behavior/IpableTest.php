@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Pablo Díez <pablodip@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Mandango\Tests\Behavior;
+namespace Mongator\Tests\Behavior;
 
-use Mandango\Tests\TestCase;
+use Mongator\Tests\TestCase;
 
 class IpableTest extends TestCase
 {
@@ -19,7 +19,7 @@ class IpableTest extends TestCase
     {
         $_SERVER['REMOTE_ADDR'] = '192.168.0.1';
 
-        $document = $this->mandango->create('Model\Ipable');
+        $document = $this->mongator->create('Model\Ipable');
         $document->setField('foo');
         $document->save();
 

@@ -2,7 +2,7 @@
  
     public function setSequence($value = null)
     {
-        $counterRepository = $this->getMandango()->getRepository('{{ options.counterClass }}');
+        $counterRepository = $this->getMongator()->getRepository('{{ options.counterClass }}');
 
         if ( !$value ) {
             $last = $this->createQuery()->sort(array('{{ options.counterField }}' => -1))->one();

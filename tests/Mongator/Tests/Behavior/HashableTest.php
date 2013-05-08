@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Máximo Cuadros <maximo@yunait.com>
  *
@@ -11,13 +11,13 @@
 
 namespace Mondongo\Tests\Behavior;
 
-use Mandango\Tests\TestCase;
+use Mongator\Tests\TestCase;
 
 class HashableTest extends TestCase
 {
     public function testHashable()
     {
-        $document = $this->mandango->create('Model\Hashable');
+        $document = $this->mongator->create('Model\Hashable');
         $document->setTitle('foo');
         $document->setContent('bar');
         $document->save();
@@ -28,7 +28,7 @@ class HashableTest extends TestCase
 
     public function testHashableFields()
     {
-        $document = $this->mandango->create('Model\HashableFields');
+        $document = $this->mongator->create('Model\HashableFields');
         $document->setTitle('foo');
         $document->setContent('bar');
         $document->save();
@@ -39,16 +39,16 @@ class HashableTest extends TestCase
 
     public function testHashableReferences()
     {
-        $one = $this->mandango->create('Model\Hashable');
+        $one = $this->mongator->create('Model\Hashable');
         $one->setTitle('qux');
 
-        $many1 = $this->mandango->create('Model\Hashable');
+        $many1 = $this->mongator->create('Model\Hashable');
         $many1->setTitle('bar');
 
-        $many2 = $this->mandango->create('Model\Hashable');
+        $many2 = $this->mongator->create('Model\Hashable');
         $many2->setTitle('quz');
 
-        $document = $this->mandango->create('Model\HashableReferences');
+        $document = $this->mongator->create('Model\HashableReferences');
         $document->setTitle('foo');
         $document->setContent('bar');
         $document->setRefOne($one);
@@ -73,18 +73,18 @@ class HashableTest extends TestCase
 
     public function testHashableEmbedded()
     {
-        $one = $this->mandango->create('Model\Comment');
+        $one = $this->mongator->create('Model\Comment');
         $one->setTitle('qux');
 
-        $many1 = $this->mandango->create('Model\Comment');
+        $many1 = $this->mongator->create('Model\Comment');
         $many1->setTitle('bar');
         $many1->setContent('baz');
 
-        $many2 = $this->mandango->create('Model\Comment');
+        $many2 = $this->mongator->create('Model\Comment');
         $many2->setContent('bar');
         $many2->setTitle('quz');
 
-        $document = $this->mandango->create('Model\HashableEmbedded');
+        $document = $this->mongator->create('Model\HashableEmbedded');
         $document->setTitle('foo');
         $document->setContent('bar');
         $document->setEmbOne($one);
@@ -107,27 +107,27 @@ class HashableTest extends TestCase
 
     public function testHashableConfigured()
     {
-        $one = $this->mandango->create('Model\Comment');
+        $one = $this->mongator->create('Model\Comment');
         $one->setTitle('qux');
 
-        $many1 = $this->mandango->create('Model\Comment');
+        $many1 = $this->mongator->create('Model\Comment');
         $many1->setTitle('bar');
         $many1->setContent('baz');
 
-        $many2 = $this->mandango->create('Model\Comment');
+        $many2 = $this->mongator->create('Model\Comment');
         $many2->setContent('bar');
         $many2->setTitle('quz');
 
-        $rone = $this->mandango->create('Model\Hashable');
+        $rone = $this->mongator->create('Model\Hashable');
         $rone->setTitle('qux');
 
-        $rmany1 = $this->mandango->create('Model\Hashable');
+        $rmany1 = $this->mongator->create('Model\Hashable');
         $rmany1->setTitle('bar');
 
-        $rmany2 = $this->mandango->create('Model\Hashable');
+        $rmany2 = $this->mongator->create('Model\Hashable');
         $rmany2->setTitle('quz');
 
-        $document = $this->mandango->create('Model\HashableConfigured');
+        $document = $this->mongator->create('Model\HashableConfigured');
         $document->setTitle('foo');
         $document->setContent('bar');
         $document->setEmbOne($one);

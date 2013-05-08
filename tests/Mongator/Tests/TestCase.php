@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Mandango.
+ * This file is part of Mongator.
  *
  * (c) Pablo Díez <pablodip@gmail.com>
  *
@@ -9,25 +9,25 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Mandango\Tests;
+namespace Mongator\Tests;
 
-use Mandango\Cache\ArrayCache;
-use Mandango\Connection;
-use Mandango\Mandango;
-use Mandango\Archive;
-use Mandango\Type\Container as TypeContainer;
+use Mongator\Cache\ArrayCache;
+use Mongator\Connection;
+use Mongator\Mongator;
+use Mongator\Archive;
+use Mongator\Type\Container as TypeContainer;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
     static protected $staticConnection;
-    static protected $staticMandango;
+    static protected $staticMongator;
 
     protected $metadataFactoryClass = 'Model\Mapping\MetadataFactory';
     protected $server = 'mongodb://localhost:27017';
-    protected $dbName = 'mandango_behaviors_tests';
+    protected $dbName = 'mongator_behaviors_tests';
 
     protected $connection;
-    protected $mandango;
+    protected $mongator;
     protected $unitOfWork;
     protected $metadataFactory;
     protected $cache;
@@ -41,17 +41,17 @@ class TestCase extends \PHPUnit_Framework_TestCase
         }
         $this->connection = static::$staticConnection;
 
-        if (!static::$staticMandango) {
-            static::$staticMandango = new Mandango(new $this->metadataFactoryClass, function($log) {});
-            static::$staticMandango->setConnection('default', $this->connection);
-            static::$staticMandango->setDefaultConnectionName('default');
+        if (!static::$staticMongator) {
+            static::$staticMongator = new Mongator(new $this->metadataFactoryClass, function($log) {});
+            static::$staticMongator->setConnection('default', $this->connection);
+            static::$staticMongator->setDefaultConnectionName('default');
         }
-        $this->mandango = static::$staticMandango;
-        $this->unitOfWork = $this->mandango->getUnitOfWork();
-        $this->metadataFactory = $this->mandango->getMetadataFactory();
-        $this->cache = $this->mandango->getFieldsCache();
+        $this->mongator = static::$staticMongator;
+        $this->unitOfWork = $this->mongator->getUnitOfWork();
+        $this->metadataFactory = $this->mongator->getMetadataFactory();
+        $this->cache = $this->mongator->getFieldsCache();
 
-        foreach ($this->mandango->getAllRepositories() as $repository) {
+        foreach ($this->mongator->getAllRepositories() as $repository) {
             $repository->getIdentityMap()->clear();
         }
 
