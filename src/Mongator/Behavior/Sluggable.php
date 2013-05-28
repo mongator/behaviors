@@ -105,6 +105,25 @@ $uniqueCode
 EOF
         );
         $this->definitions['document_base']->addMethod($method);
+
+        // query ->findBySlug()
+        $method = new Method('public', 'findBySlug', '$slug', <<<EOF
+        if ( !\$slug || strlen(\$slug) == 0 ) throw new Exception('Invalid argument: \$slug.');
+        return \$this->mergeCriteria(array('$slugField' => (string)\$slug));
+EOF
+        );
+        $method->setDocComment(<<<EOF
+    /**
+     * Returns a document by slug.
+     *
+     * @param string \$slug The slug.
+     *
+     * @return mixed The document or null if it does not exist.
+     */
+EOF
+        );
+        $this->definitions['query_base']->addMethod($method);
+
         
         // repository ->findOneBySlug()
         $method = new Method('public', 'findOneBySlug', '$slug', <<<EOF
