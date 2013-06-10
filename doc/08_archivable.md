@@ -39,6 +39,7 @@ Options
 Usage
 -----
 
+```php
 $article = $this->mongator->create('Model\Article')
     ->setTitle('foo')
     ->save();
