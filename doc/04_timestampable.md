@@ -24,10 +24,10 @@ array(
 Options
 -------
 
-* ```createdEnabled``` (default true): if saving or not the creation date (enabled by default)
-* ```createdField``` (default 'created_at'): field used to store the creation date (*created_at* by default)
-* ```updatedEnabled``` (default true): if saving or not the update date (enabled by default)
-* ```updatedField``` (default 'updated_at'): field used to store the update date (*updated_at* by default)
+* ```createdEnabled``` (default true): if saving or not the creation date
+* ```createdField``` (default 'created_at'): field used to store the creation date
+* ```updatedEnabled``` (default true): if saving or not the update date
+* ```updatedField``` (default 'updated_at'): field used to store the update date
 
 
 Usage
