@@ -14,7 +14,7 @@ array(
             'content' => 'string',
             ),
         'behaviors' => array(
-            array('class' => 'Mandango\Behavior\Ipable'),
+            array('class' => 'Mongator\Behavior\Ipable'),
         ),
     ),
 );
@@ -23,11 +23,11 @@ array(
 Options
 -------
 
-* ```createdEnabled```: if saving or not the IP from where documents are created (enabled by default)
-* ```createdField```: field used to store the IP from where documents are created (*created_from* by default)
-* ```updatedEnabled```: if saving or not the IP from where documents are updated (enabled by default)
-* ```updatedField```: field used to store the IP from where documents are updated (*updated_from* by default)
-* ```getIpCallable```: callable that returns the IP to save (*Mandango\Behavior\Util\IpableUtil::getIp()* by default)
+* ```createdEnabled``` (default true): if saving or not the IP from where documents are created 
+* ```createdField``` (default 'created_from'): field used to store the IP from where documents are created
+* ```updatedEnabled``` (default true): if saving or not the IP from where documents are updated
+* ```updatedField``` (default 'updated_from'): field used to store the IP from where documents are updated
+* ```getIpCallable``` (default 'Mandango\Behavior\Util\IpableUtil::getIp()'): callable that returns the IP to save 
 
 Usage
 -----
