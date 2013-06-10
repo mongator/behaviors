@@ -32,6 +32,10 @@ class AutoIncrementableTest extends TestCase
      */
     public function testArchivableUninitialized()
     {
+        if ( !method_exists('MongoCollection', 'findAndModify') ) {
+            $this->markTestSkipped('MongoDB driver >1.3.0 required');
+        }
+
         $model = $this->mongator->create('Model\AutoIncrementable')
             ->setTitle('foo')
             ->save();
@@ -39,6 +43,10 @@ class AutoIncrementableTest extends TestCase
 
     public function testArchivableCustom()
     {
+        if ( !method_exists('MongoCollection', 'findAndModify') ) {
+            $this->markTestSkipped('MongoDB driver >1.3.0 required');
+        }
+
         $counterRepository = $this->mongator->getRepository('Model\OtherCounter');
         $counterRepository->setSequence('test2', 1);
 
@@ -51,6 +59,10 @@ class AutoIncrementableTest extends TestCase
 
     public function testSetSequence()
     {
+        if ( !method_exists('MongoCollection', 'findAndModify') ) {
+            $this->markTestSkipped('MongoDB driver >1.3.0 required');
+        }
+
         $repository = $this->mongator->getRepository('Model\AutoIncrementableCustom');
         $repository->setSequence(2);
 
