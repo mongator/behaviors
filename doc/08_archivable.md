@@ -47,7 +47,10 @@ $article = $this->mongator->create('Model\Article')
 $id = $article->getId();
 $article->delete();
 
-$copy = $this->mongator->getRepository('Model\Article\Archive')->createQuery(array('document' => $id))->one();
+$copy = $this->mongator
+    ->getRepository('Model\Article\Archive')
+    ->createQuery(array('document' => $id))
+    ->one();
 
 echo $copy->getTitle(); // foo
 ```
