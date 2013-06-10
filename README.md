@@ -6,9 +6,10 @@ These are the official behaviors of Mongator.
 - Timestampable: saves the creation and/or update date in the documents
 - Ipable: saves the IP from where documents are created and/or saved
 - Sluggable: saves the slug of a field in the documents
-- Archivable: Save a document copy from one collection to other
+- [Archivable](doc/01_archivable.md): Save a document copy from one collection to other
 - Tokenizable: Generate a token on creation
 - Hasable: Generate a hash for a given fields/rels/embs from the given document, on update and or creation
+- AutoIncrementable: Auto incrementable field like [AUTO_INCREMENT](http://dev.mysql.com/doc/refman/5.0/en/example-auto-increment.html) at MySQL
 
 Requirements
 ------------
