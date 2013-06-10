@@ -14,7 +14,12 @@ array(
             'content' => 'string',
         ),
         'extensions' => array(
-            array('class' => 'Mandango\Behavior\Sluggable', 'options' => array('fromField' => 'title')),
+            array(
+                'class' => 'Mandango\Behavior\Sluggable', 
+                'options' => array(
+                    'fromField' => 'title'
+                )
+            ),
         ),
     ),
 );
@@ -34,13 +39,13 @@ Usage
 -----
 
 ```php
-$article = $mandango->create('Model\Article')
+$article = $mongator->create('Model\Article')
     ->setTitle('Mongator is ultrafast!')
     ->save();
 
 echo $article->getSlug(); // mongator-is-ultrafast
 
-$article2 = $mandango->create('Model\Article')
+$article2 = $mongator->create('Model\Article')
     ->setTitle('Mongator is ultrafast!')
     ->save();
 
