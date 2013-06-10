@@ -23,7 +23,7 @@
     public function setSequence($name, $value = 0)
     {
         if ( !$sequence = $this->getSequence($name) ) {
-            $sequence = $this->create();
+            $sequence = $this->getMongator()->create($this->documentClass);
         }
         
         $sequence->setName($name);

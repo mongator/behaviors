@@ -44,6 +44,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
         if (!static::$staticMongator) {
             static::$staticMongator = new Mongator(new $this->metadataFactoryClass, function($log) {});
             static::$staticMongator->setConnection('default', $this->connection);
+
+            static::$staticMongator->setConnection('alt', $this->connection);
             static::$staticMongator->setDefaultConnectionName('default');
         }
         $this->mongator = static::$staticMongator;

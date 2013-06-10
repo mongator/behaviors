@@ -110,6 +110,37 @@ return array(
             )
         ),
     ),
+    // AutoIncrementable
+    'Model\AutoIncrementable' => array(
+        'fields' => array(
+            'title' => 'string',
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mongator\Behavior\AutoIncrementable',
+                'options' => array(
+                    'counterName' => 'test',
+                    'counterField' => 'test',
+                )
+            ),
+        ),
+    ),
+    'Model\AutoIncrementableCustom' => array(
+        'connection' => 'alt', 
+        'fields' => array(
+            'title' => 'string',
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mongator\Behavior\AutoIncrementable',
+                'options' => array(
+                    'counterClass' => 'Model\OtherCounter',
+                    'counterName' => 'test2',
+                    'counterField' => 'test',
+                )
+            ),
+        ),
+    ),
     // Sortable
     'Model\Sortable' => array(
         'fields' => array(

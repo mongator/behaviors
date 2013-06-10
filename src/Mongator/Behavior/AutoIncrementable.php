@@ -6,9 +6,9 @@ use Mandango\Mondator\Definition\Method;
 use Mongator\Twig\Mongator as MongatorTwig;
 
 /**
- * Archivable.
+ * AutoIncrementable.
  *
- * @author Pablo Díez <pablodip@gmail.com>
+ * @author Máximo Cuadros <maximo@yunait.com>
  */
 class AutoIncrementable extends ClassExtension
 {
@@ -22,9 +22,8 @@ class AutoIncrementable extends ClassExtension
         $this->addOptions(array(
             'counterName' => null,
             'counterField' => null,
-            'step' => 2,
             'collection' => 'counters',
-            'counterClass' => 'Core\Models\Counter'
+            'counterClass' => 'Model\Counter'
         ));
     }
 
@@ -45,12 +44,19 @@ class AutoIncrementable extends ClassExtension
     {
         if ( $this->isCounter() ) return;
 
+        if (!$this->getOption('counterField')) {
+            throw new \RuntimeException('counterField option cannot be null');
+        }
+
+        if (!$this->getOption('counterName')) {
+            throw new \RuntimeException('counterName option cannot be null');
+        }
+
         // field
         if ( !isset($this->configClass['fields'][$this->getOption('counterField')]) ) {
             $this->configClass['fields'][$this->getOption('counterField')] = 'integer';
         } 
         
-
         // index
         $this->configClass['indexes'][] = array(
             'keys'    => array($this->getOption('counterField') => 1),
@@ -80,14 +86,17 @@ class AutoIncrementable extends ClassExtension
                 file_get_contents(__DIR__.'/templates/AutoIncrementableRepository.php.twig')
             );
         }
-
     }
 
 
     private function getCounterConfigClass()
     {
+        if ( !isset($this->configClass['connection']) ) $connection = null;
+        else $connection = $this->configClass['connection'];
+        
         return array(
             'collection' => $this->getOption('collection'),
+            'connection' => $connection,
             'counter' => true,
             'fields' =>  array(
                 'name' => 'string',

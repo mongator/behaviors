@@ -4,7 +4,10 @@
     {
         $counterRepository = $this->getMongator()->getRepository('{{ options.counterClass }}');
         if ( !$value = $this->get{{ options.counterField|ucfirst }}() ) {
-            $value = $counterRepository->getNextSequence('{{ options.counterName }}');
+            if ( !$value = $counterRepository->getNextSequence('{{ options.counterName }}') ) {
+                throw new \RuntimeException('uninitialized sequence "{{ options.counterName }}"');
+            }
+
             $this->set{{ options.counterField|ucfirst }}($value);
         }
     }
