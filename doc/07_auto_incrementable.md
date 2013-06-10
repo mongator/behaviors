@@ -1,7 +1,7 @@
 Auto-Incrementable
 ==================
 
-The *AutoIncrementable* behavior implements an auto incrementable field like [AUTO_INCREMENT][http://dev.mysql.com/doc/refman/5.0/en/example-auto-increment.html] at MySQL. This is an atomic operation so no colision is possible. 
+The *AutoIncrementable* behavior implements an auto incrementable field like [AUTO_INCREMENT](http://dev.mysql.com/doc/refman/5.0/en/example-auto-increment.html) at MySQL. This is an atomic operation so no colision is possible. 
 
 > Just works with PHP Mongo Driver >1.3.0
 
@@ -40,11 +40,11 @@ Options
 Usage
 -----
 
-The first will need to do is initializete the sequence, if not a exception will be rised.
+The first think we need to do is initializete the sequence, if not a exception will be rised.
 
 
 ```php
-$repository = $this->mongator->getRepository('Model\Article');
+$repository = $mongator->getRepository('Model\Article');
 $repository->setSequence();
 ```
 
@@ -53,7 +53,7 @@ $articleA = $mongator->create('Model\Article')->setTitle('Mongator is fast')->sa
 
 echo $articleA->getIdentifier(); // 1
 
-$articleB = $mongator->create('Model\Article')->setTitle('Mongator is powerfull')->save();
+$articleB = $mongator->create('Model\Article')->setTitle('Mongator is powerful')->save();
 
 echo $articleB->getIdentifier(); // 2
 ```
