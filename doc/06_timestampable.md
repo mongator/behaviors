@@ -1,7 +1,7 @@
 Timestampable
 =============
 
-The *Timestampable* behavior saves automatically the creation and/or update date in the documents.
+The *Timestampable* behavior automatically saves the date of creation and/or update in the documents.
 
 Configuration
 -------------
@@ -24,9 +24,9 @@ array(
 Options
 -------
 
-* ```createdEnabled``` (default true): if saving or not the creation date
+* ```createdEnabled``` (default true): wheather to save the creation date
 * ```createdField``` (default 'created_at'): field used to store the creation date
-* ```updatedEnabled``` (default true): if saving or not the update date
+* ```updatedEnabled``` (default true): wheather to save the update date
 * ```updatedField``` (default 'updated_at'): field used to store the update date
 
 
