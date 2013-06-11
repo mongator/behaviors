@@ -30,8 +30,8 @@ Options
 
 * ```fromField``` (required): field used to generate the slug.
 * ```slugField``` (default 'slug'): field used to store the slug.
-* ```unique``` (default 'true'): wheather the slugs have to be unique. If set to true, a unique index is created.
-* ```update``` (default 'false'): wheather the slugs can be updated when the field from where the slug is created is modified.
+* ```unique``` (default 'true'): whether the slugs have to be unique. If set to true, a unique index is created.
+* ```update``` (default 'false'): whether the slugs can be updated when the field from where the slug is created is modified.
 * ```builder``` (default 'Mandango\Behavior\Util\Sluggable::slugify()'): function that converts the base string to slug
 
 

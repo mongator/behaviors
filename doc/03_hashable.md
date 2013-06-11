@@ -31,8 +31,8 @@ array(
 Options
 -------
 
-* ```createdEnabled``` (default true): wheather the hash will be saved when the documents are created
-* ```updatedEnabled``` (default true): wheather the hash will be saved when the documents are updated
+* ```createdEnabled``` (default true): whether the hash will be saved when the documents are created
+* ```updatedEnabled``` (default true): whether the hash will be saved when the documents are updated
 * ```field``` (default 'hash'): field used to store the hash
 * ```fromFields``` (default array()): the list of fields used to create the hash. If empty, all fields will be used.
 

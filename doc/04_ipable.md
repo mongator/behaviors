@@ -23,9 +23,9 @@ array(
 Options
 -------
 
-* ```createdEnabled``` (default true): wheather to save the IP from where documents are created 
+* ```createdEnabled``` (default true): whether to save the IP from where documents are created 
 * ```createdField``` (default 'created_from'): field used to store the IP from where documents are created
-* ```updatedEnabled``` (default true): wheather to save the IP from where documents are updated
+* ```updatedEnabled``` (default true): whether to save the IP from where documents are updated
 * ```updatedField``` (default 'updated_from'): field used to store the IP from where documents are updated
 * ```getIpCallable``` (default 'Mandango\Behavior\Util\IpableUtil::getIp()'): callable that returns the IP to save 
 
