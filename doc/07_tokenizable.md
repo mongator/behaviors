@@ -1,7 +1,7 @@
 Tokenizable
 ===========
 
-The *Tokenizable* behavior saves automatically a random token string.
+The *Tokenizable* behavior automatically saves a random token string.
 
 Configuration
 -------------
