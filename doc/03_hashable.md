@@ -1,7 +1,7 @@
 Hashable
 ========
 
-The *Hashable* behavior saves automatically a hash string based on all or some fields from the document. 
+The *Hashable* behavior automatically saves a hash string based on all or some of the document's fields. 
 
 > Works with all type of fields, relations or embedded documents.
 
@@ -31,10 +31,10 @@ array(
 Options
 -------
 
-* ```createdEnabled``` (default true): if the hash will be saved when the documents are created
-* ```updatedEnabled``` (default true): if the hash will be saved when the documents are updated
+* ```createdEnabled``` (default true): wheather the hash will be saved when the documents are created
+* ```updatedEnabled``` (default true): wheather the hash will be saved when the documents are updated
 * ```field``` (default 'hash'): field used to store the hash
-* ```fromFields``` (default array()): the list of fields used to create the hash, if empty all the fields will be used
+* ```fromFields``` (default array()): the list of fields used to create the hash. If empty, all fields will be used.
 
 Usage
 -----
