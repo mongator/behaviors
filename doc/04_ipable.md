@@ -1,7 +1,7 @@
 Ipable
 ======
 
-The *Ipable* behavior saves automatically the IP from where the documents are created and/or updated.
+The *Ipable* behavior automatically saves the IP from where the documents are created and/or updated.
 
 Configuration
 -------------
@@ -23,9 +23,9 @@ array(
 Options
 -------
 
-* ```createdEnabled``` (default true): if saving or not the IP from where documents are created 
+* ```createdEnabled``` (default true): wheather to save the IP from where documents are created 
 * ```createdField``` (default 'created_from'): field used to store the IP from where documents are created
-* ```updatedEnabled``` (default true): if saving or not the IP from where documents are updated
+* ```updatedEnabled``` (default true): wheather to save the IP from where documents are updated
 * ```updatedField``` (default 'updated_from'): field used to store the IP from where documents are updated
 * ```getIpCallable``` (default 'Mandango\Behavior\Util\IpableUtil::getIp()'): callable that returns the IP to save 
 
