@@ -1,7 +1,7 @@
 Sluggable
 =========
 
-The *Sluggable* behavior saves the slug of one field in another one.
+The *Sluggable* behavior saves the slug of one field in another.
 
 Configuration
 -------------
@@ -28,10 +28,10 @@ array(
 Options
 -------
 
-* ```fromField``` (required): field used to generate the slug 
-* ```slugField``` (default 'slug'): field used to store the slug 
-* ```unique``` (default 'true'): if the slugs have to be unique, if it is enabled a unique index is created
-* ```update``` (default 'false'): if the slugs can be updated if the field from where the slug is created is modified
+* ```fromField``` (required): field used to generate the slug.
+* ```slugField``` (default 'slug'): field used to store the slug.
+* ```unique``` (default 'true'): wheather the slugs have to be unique. If set to true, a unique index is created.
+* ```update``` (default 'false'): wheather the slugs can be updated when the field from where the slug is created is modified.
 * ```builder``` (default 'Mandango\Behavior\Util\Sluggable::slugify()'): function that converts the base string to slug
 
 
