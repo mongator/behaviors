@@ -3,7 +3,7 @@ Auto-Incrementable
 
 The *AutoIncrementable* behavior implements an auto incrementable field like [AUTO_INCREMENT](http://dev.mysql.com/doc/refman/5.0/en/example-auto-increment.html) at MySQL. This is an atomic operation so no colision is possible. 
 
-> Just works with PHP Mongo Driver >1.3.0
+> Requires PHP Mongo Driver >1.3.0
 
 Configuration
 -------------
@@ -31,16 +31,16 @@ array(
 Options
 -------
 
-* ```counterField``` (required): field used to store the last value from the sequence
-* ```counterName``` (required): the name of the sequence to be used, you can share it between collections
-* ```collection``` (default 'counters'): the collection where the sequences will be stored
-* ```counterClass``` (default 'Model\Counter'): a new model will be create to interact with the sequences, this is the classname of it.
+* ```counterField``` (required): field used to store the last value from the sequence.
+* ```counterName``` (required): the name of the sequence to be used. It can be shared between collections.
+* ```collection``` (default 'counters'): the collection where the sequences will be stored.
+* ```counterClass``` (default 'Model\Counter'): a new model will be created to interact with the sequences. This is its classname.
 
 
 Usage
 -----
 
-The first think we need to do is initializete the sequence, if not a exception will be rised.
+The first thing we need to do is initialize the sequence. Elsewise an exception will be rised.
 
 
 ```php
