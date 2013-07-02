@@ -126,7 +126,7 @@ return array(
         ),
     ),
     'Model\AutoIncrementableCustom' => array(
-        'connection' => 'alt', 
+        'connection' => 'alt',
         'fields' => array(
             'title' => 'string',
         ),
@@ -309,6 +309,3 @@ return array(
         )
     ),
 );
-
-
-

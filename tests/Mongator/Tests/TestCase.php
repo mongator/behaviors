@@ -11,7 +11,6 @@
 
 namespace Mongator\Tests;
 
-use Mongator\Cache\ArrayCache;
 use Mongator\Connection;
 use Mongator\Mongator;
 use Mongator\Archive;
@@ -19,8 +18,8 @@ use Mongator\Type\Container as TypeContainer;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
-    static protected $staticConnection;
-    static protected $staticMongator;
+    protected static $staticConnection;
+    protected static $staticMongator;
 
     protected $metadataFactoryClass = 'Model\Mapping\MetadataFactory';
     protected $server = 'mongodb://localhost:27017';

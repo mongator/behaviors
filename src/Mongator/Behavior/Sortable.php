@@ -12,7 +12,6 @@
 namespace Mongator\Behavior;
 
 use Mandango\Mondator\ClassExtension;
-use Mandango\Mondator\Definition\Method;
 use Mongator\Twig\Mongator as MongatorTwig;
 
 /**
