@@ -73,5 +73,3 @@ class AutoIncrementableTest extends TestCase
         $this->assertSame(3, $model->getTest());
     }
 }
-
-

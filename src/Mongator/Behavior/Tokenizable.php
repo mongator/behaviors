@@ -75,6 +75,7 @@ EOF
 
         // repository ->findOneBytoken()
         $method = new Method('public', 'findByToken', '$token', <<<EOF
+
         return \$this->createQuery(array('$field' => \$token))->one();
 EOF
         );

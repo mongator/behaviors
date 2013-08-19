@@ -12,12 +12,11 @@
 namespace Mongator\Behavior;
 
 use Mandango\Mondator\ClassExtension;
-use Mandango\Mondator\Definition\Method;
 use Mongator\Twig\Mongator as MongatorTwig;
 
 /**
  * Archivable.
- * 
+ *
  * @author Máximo Cuadros <maximo@yunait.com>
  * @author Pablo Díez <pablodip@gmail.com>
  */

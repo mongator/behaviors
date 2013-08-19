@@ -1,5 +1,5 @@
 <?php
- 
+
     public function setSequence($value = null)
     {
         $counterRepository = $this->getMongator()->getRepository('{{ options.counterClass }}');
@@ -7,7 +7,7 @@
         if ( !$value ) {
             $last = $this->createQuery()->sort(array('{{ options.counterField }}' => -1))->one();
             if ( $last ) $value = $last->get{{ options.counterField|ucfirst }}() + 1;
-        } 
+        }
 
         return $counterRepository->setSequence('{{ options.counterName }}', $value);
     }

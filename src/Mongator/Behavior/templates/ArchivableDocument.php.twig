@@ -5,7 +5,7 @@
     {
         $archive = $this->createArchiveObject();
         $this->copyContentOn($archive);
-        
+
         $archive->save();
         return $archive;
     }
@@ -42,4 +42,3 @@
     {
         return $this->getMongator()->create('{{ extension.archiveClass }}');
     }
-

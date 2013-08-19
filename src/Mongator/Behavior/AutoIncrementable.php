@@ -2,7 +2,6 @@
 namespace Mongator\Behavior;
 
 use Mandango\Mondator\ClassExtension;
-use Mandango\Mondator\Definition\Method;
 use Mongator\Twig\Mongator as MongatorTwig;
 
 /**
@@ -18,7 +17,7 @@ class AutoIncrementable extends ClassExtension
     protected function setUp()
     {
         if ( $this->isCounter() ) return;
-        
+
         $this->addOptions(array(
             'counterName' => null,
             'counterField' => null,
@@ -55,8 +54,8 @@ class AutoIncrementable extends ClassExtension
         // field
         if ( !isset($this->configClass['fields'][$this->getOption('counterField')]) ) {
             $this->configClass['fields'][$this->getOption('counterField')] = 'integer';
-        } 
-        
+        }
+
         // index
         $this->configClass['indexes'][] = array(
             'keys'    => array($this->getOption('counterField') => 1),
@@ -88,12 +87,10 @@ class AutoIncrementable extends ClassExtension
         }
     }
 
-
     private function getCounterConfigClass()
     {
         if ( !isset($this->configClass['connection']) ) $connection = null;
         else $connection = $this->configClass['connection'];
-        
         return array(
             'collection' => $this->getOption('collection'),
             'connection' => $connection,
@@ -113,7 +110,6 @@ class AutoIncrementable extends ClassExtension
             ),
         );
     }
-
 
     private function isCounter()
     {

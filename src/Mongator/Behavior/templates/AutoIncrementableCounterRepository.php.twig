@@ -10,12 +10,12 @@
     {
         $result = $this->getCollection()
         ->findAndModify(
-            array('name' => $name), 
+            array('name' => $name),
             array('$inc' => array('sequence' => 1)),
             null,
             array('new' => true)
         );
-        
+
         if ( isset($result['sequence']) )  return (int)$result['sequence'];
         else return false;
     }
@@ -25,7 +25,7 @@
         if ( !$sequence = $this->getSequence($name) ) {
             $sequence = $this->getMongator()->create($this->documentClass);
         }
-        
+
         $sequence->setName($name);
         $sequence->setSequence($value);
         return $sequence->save();

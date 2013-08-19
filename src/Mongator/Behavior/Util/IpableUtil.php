@@ -23,7 +23,7 @@ class IpableUtil
      *
      * @return string The IP.
      */
-    static public function getIp()
+    public static function getIp()
     {
         return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
     }

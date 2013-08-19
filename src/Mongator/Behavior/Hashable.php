@@ -81,6 +81,7 @@ class Hashable extends ClassExtension
 
         // repository ->findOneByHash()
         $method = new Method('public', 'findByHash', '$hash', <<<EOF
+
         return \$this->createQuery(array('$field' => \$hash))->one();
 EOF
         );

@@ -90,7 +90,6 @@ class SortableTest extends TestCase
     {
         $documents = $this->createDocumentsInheritance(array('parent' => 1, 'child' => 1));
 
-
         $this->assertFalse($documents[1]->isLast());
         $this->assertTrue($documents[2]->isLast());
     }
