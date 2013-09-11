@@ -19,7 +19,7 @@
     "require": {
         "php": ">=5.3.0",
         
-        "mongator/mongator": "self.version"
+        "mongator/mongator": "dev-master"
     },
     "autoload": {
         "psr-0": { "Mongator\\Behavior\\": "src/" }
