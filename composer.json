@@ -5,6 +5,7 @@
     "keywords": ["mongator","behaviors"],
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name":  "Máximo Cuadros",
@@ -17,7 +18,8 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "mongator/mongator": "*"
+        
+        "mongator/mongator": "self.version"
     },
     "autoload": {
         "psr-0": { "Mongator\\Behavior\\": "src/" }
