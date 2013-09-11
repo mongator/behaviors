@@ -308,4 +308,41 @@ return array(
             'content' => 'string'
         )
     ),
+
+    'Model\IdentifiableDocument' => array(
+       'embeddedsOne' => array(
+            'embOne' => array('class' => 'Model\Identifiable'),
+            'embTwo' => array('class' => 'Model\IdentifiableCustom'),
+        ),
+    ),
+
+    'Model\Identifiable' => array(
+        'isEmbedded' => true,
+        'fields' => array(
+            'title' => 'string',
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mongator\Behavior\Identifiable',
+                'options' => array(),
+            )
+        ),
+    ),
+
+    'Model\IdentifiableCustom' => array(
+        'isEmbedded' => true,
+        'fields' => array(
+            'title' => 'string',
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mongator\Behavior\Identifiable',
+                'options' => array(
+                    'idGeneratorMethod' => array(
+                        'Mongator\Tests\Behavior\IdentifiableTest', 'generateId'
+                    )
+                ),
+            )
+        ),
+    ),
 );

@@ -18,6 +18,7 @@ use Mandango\Mondator\Definition\Method;
 /**
  * Hashable.
  *
+ * @author Máximo Cuadros <maximo@yunait.com>
  * @author Pablo Díez <pablodip@gmail.com>
  */
 class Hashable extends ClassExtension
