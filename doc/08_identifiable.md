@@ -1,7 +1,7 @@
 Identifiable
 ===========
 
-The *Identifiable* behavior automatically saves a identifier in the document. 
+The *Identifiable* behavior automatically saves an identifier in the document. 
 
 NOTE: This behavior only can be used with EmbeddedDocuments
 
