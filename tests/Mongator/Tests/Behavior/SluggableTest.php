@@ -46,4 +46,61 @@ class SluggableTest extends TestCase
         $this->assertSame($documents[3], $repository->findOneBySlug($documents[3]->getSlug()));
         $this->assertSame($documents[6], $repository->findOneBySlug($documents[6]->getSlug()));
     }
+
+    public function testGlobalSluggable()
+    {
+        $documents = array();
+
+        $documents[1] = $this->mongator->create('Model\GlobalSluggable');
+        $documents[1]->setTitle(' Testing Sluggable Extensión ');
+        $documents[1]->save();
+
+        $this->assertSame('testing-sluggable-extension', $documents[1]->getSlug());
+
+        $documents[2] = $this->mongator->create('Model\GlobalSluggable');
+        $documents[2]->setTitle(' Testing Sluggable Extensión ');
+        $documents[2]->save();
+
+        $this->assertSame('testing-sluggable-extension-2', $documents[2]->getSlug());
+    }
+
+
+    public function testGlobalSluggableMixed()
+    {
+        $documents = array();
+
+        $documents[1] = $this->mongator->create('Model\GlobalSluggable');
+        $documents[1]->setTitle(' Testing Sluggable Extensión ');
+        $documents[1]->save();
+
+        $this->assertSame('testing-sluggable-extension', $documents[1]->getSlug());
+
+        $documents[2] = $this->mongator->create('Model\AnotherGlobalSluggable');
+        $documents[2]->setTitle(' Testing Sluggable Extensión ');
+        $documents[2]->save();
+
+        $this->assertSame('testing-sluggable-extension-2', $documents[2]->getSlug());
+
+    }
+
+    public function testGlobalSluggableCollectionTest()
+    {
+        $documents = array();
+
+        $documents[1] = $this->mongator->create('Model\GlobalSluggable');
+        $documents[1]->setTitle(' Testing Sluggable Extensión ');
+        $documents[1]->save();
+
+        $documents[2] = $this->mongator->create('Model\AnotherGlobalSluggable');
+        $documents[2]->setTitle(' Testing Sluggable Extensión ');
+        $documents[2]->save();
+    
+        $repository = $this->mongator->getRepository('Model\Slug');
+
+        $slug = $repository->createQuery()->findBySlug($documents[1]->getSlug())->one();
+        $this->assertInstanceOf('Model\GlobalSluggable', $slug->getDocument());
+
+        $slug = $repository->createQuery()->findBySlug($documents[2]->getSlug())->one();
+        $this->assertInstanceOf('Model\AnotherGlobalSluggable', $slug->getDocument());
+    }
 }

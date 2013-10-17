@@ -32,9 +32,12 @@ class Sluggable extends ClassExtension
 
         $this->addOptions(array(
             'slugField' => 'slug',
-            'unique'    => true,
+            'unique'    => 'local',
             'update'    => false,
             'builder'   => array('\Mongator\Behavior\Util\SluggableUtil', 'slugify'),
+            'collection' => null,
+            'conection' => null,
+            'slugClass' => null
         ));
     }
 
@@ -61,6 +64,70 @@ class Sluggable extends ClassExtension
         if ($this->getOption('update')) {
             $this->configClass['events']['preUpdate'][] = 'updateSluggableSlug';
         }
+
+        if ($this->getOption('unique') == 'global') {
+            $this->configClass['events']['postInsert'][] = 'insertSlugInCollection';
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doNewConfigClassesProcess()
+    {
+        if ($this->getOption('unique') != 'global') {
+            return;   
+        }  
+
+        if ( isset($this->newConfigClasses[$this->getOption('slugClass')]) ) return;
+        $this->newConfigClasses[$this->getOption('slugClass')] = $this->getSlugConfigClass();
+    }
+
+
+    private function getSlugConfigClass()
+    {
+        return array(
+            'collection' => $this->getOption('collection'),
+            'connection' => $this->getOption('conection'),
+            'fields' =>  array(
+                'slug' => 'string',
+            ),
+            'referencesOne' => array(
+                'document' => array(
+                    'polymorphic' => true, 
+                    'discriminatorField' => 'documents', 
+                    'discriminatorMap' => $this->getDiscriminatorMapUsingSluggableModels()
+                ),
+            ),
+            'indexes' => array(
+                array(
+                    'keys'    => array('slug' => 1),
+                    'options' => array('unique' => 1),
+                )
+            )
+        );
+    }
+
+    private function getDiscriminatorMapUsingSluggableModels()
+    {
+        $discriminatorMap = array();
+
+        foreach ($this->configClasses as $class => $config) {
+            if (isset($config['behaviors'])) {
+                foreach ($config['behaviors'] as $behavior) {
+                    if ($behavior['class'] == __CLASS__) {
+                        if (
+                            isset($behavior['options']['unique']) && 
+                            $behavior['options']['unique'] == 'global'
+                        ) {
+                            $discriminatorMap[$class] = $class;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $discriminatorMap;
     }
 
     /**

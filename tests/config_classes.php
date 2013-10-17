@@ -110,6 +110,36 @@ return array(
             )
         ),
     ),
+    'Model\GlobalSluggable' => array(
+        'fields' => array(
+            'title' => 'string',
+        ),
+        'behaviors' => array(
+            array(
+                'class'   => 'Mongator\Behavior\Sluggable',
+                'options' => array(
+                    'fromField' => 'title',
+                    'unique' => 'global',
+                    'slugClass' => 'Model\Slug',
+                ),
+            )
+        ),
+    ),
+    'Model\AnotherGlobalSluggable' => array(
+        'fields' => array(
+            'title' => 'string',
+        ),
+        'behaviors' => array(
+            array(
+                'class'   => 'Mongator\Behavior\Sluggable',
+                'options' => array(
+                    'fromField' => 'title',
+                    'unique' => 'global',
+                    'slugClass' => 'Model\Slug',
+                ),
+            )
+        ),
+    ),
     // AutoIncrementable
     'Model\AutoIncrementable' => array(
         'fields' => array(

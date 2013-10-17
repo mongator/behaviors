@@ -5,29 +5,49 @@
         if ( $this->get{{ options.slugField|ucfirst }}() !== null ) return true;
         if ( $this->get{{ options.fromField|ucfirst }}() === null ) return true;
 
-        $slug = call_user_func({{ options.builder|var_export }}, $this->get{{ options.fromField|ucfirst }}());
+        $slug = $proposal = $this->generateSlug();
 
 {% if options.unique %}
-        $slug = $this->getNewSlugIfBusy($slug);
+        $try = 1;
+        while($this->slugExists($slug)) {
+            $slug = $proposal . '-' . ++$try;
+        }
 {% endif %}
 
         $this->set{{ options.slugField|ucfirst }}($slug);
     }
 
-    protected function getNewSlugIfBusy($proposal)
+    protected function generateSlug()
     {
-        $slug = $proposal;
-
-        $similarSlugs = array();
-        $mongoRegExp = new \MongoRegex('/^'.$slug.'/');
-        foreach ($this->getRepository()->getCollection()->find(array('{{ options.slugField }}' => $mongoRegExp)) as $result) {
-            $similarSlugs[] = $result['{{ options.slugField }}'];
-        }
-
-        $i = 1;
-        while (in_array($slug, $similarSlugs)) {
-            $slug = $proposal . '-' . ++$i;
-        }
-
-        return $slug;
+        return call_user_func({{ options.builder|var_export }}, $this->get{{ options.fromField|ucfirst }}());
     }
+
+{% if options.unique %}
+    protected function slugExists($slug)
+    {
+{% if options.unique == 'local' %}
+        $repository = $this->getRepository();
+{% elseif options.unique == 'global' %}
+        $repository = $this->getMongator()->getRepository('{{ options.slugClass }}');
+{% endif %}
+
+        return (boolean) $repository->getCollection()->findOne(
+            array('{{ options.slugField }}' => $slug),
+            array('{{ options.slugField }}' => 1)
+        );
+    }
+{% endif %}
+
+
+{% if options.unique == 'global' %}
+    protected function insertSlugInCollection()
+    {
+        if ( $this->get{{ options.slugField|ucfirst }}() === null ) return true;
+        if ( $this->slugExists($this->get{{ options.slugField|ucfirst }}()) ) return true;
+
+        $slugDocument = $this->getMongator()->create('{{ options.slugClass }}');
+        $slugDocument->setSlug($this->get{{ options.slugField|ucfirst }}());
+        $slugDocument->setDocument($this);
+        $slugDocument->save();
+    }
+{% endif %}
