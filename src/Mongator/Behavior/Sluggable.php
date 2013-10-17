@@ -75,7 +75,7 @@ class Sluggable extends ClassExtension
      */
     protected function doNewConfigClassesProcess()
     {
-        if ($this->getOption('unique') != 'global') {
+        if ($this->getOption('unique') !== 'global') {
             return;   
         }  
 
