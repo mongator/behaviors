@@ -11,6 +11,7 @@
 
 namespace Mongator\Behavior;
 
+use Mongator\Twig\Mongator as MongatorTwig;
 use Mandango\Mondator\ClassExtension;
 use Mandango\Mondator\Definition\Method;
 
@@ -18,6 +19,7 @@ use Mandango\Mondator\Definition\Method;
  * Sluggable.
  *
  * @author Pablo Díez <pablodip@gmail.com>
+ * @author Máximo Cuadros <maximo@yunait.com>
  */
 class Sluggable extends ClassExtension
 {
@@ -69,41 +71,9 @@ class Sluggable extends ClassExtension
         // field
         $slugField = $this->getOption('slugField');
 
-        // update slug
-        $fromField = $this->getOption('fromField');
-        $fromFieldCamelized = ucfirst($fromField);
-        $slugFieldCamelized = ucfirst($slugField);
-        $builder = var_export($this->getOption('builder'), true);
-
-        $uniqueCode = '';
-        if ($this->getOption('unique')) {
-            $uniqueCode = <<<EOF
-        \$similarSlugs = array();
-        foreach (\$this->getRepository()->getCollection()
-            ->find(array('$slugField' => new \MongoRegex('/^'.\$slug.'/')))
-        as \$result) {
-            \$similarSlugs[] = \$result['$slugField'];
-        }
-
-        \$i = 1;
-        while (in_array(\$slug, \$similarSlugs)) {
-            \$slug = \$proposal.'-'.++\$i;
-        }
-EOF;
-        }
-
-        $method = new Method('protected', 'updateSluggableSlug', '', <<<EOF
-        if ( \$this->get$slugFieldCamelized() !== null ) return true;
-        if ( \$this->get$fromFieldCamelized() === null ) return true;
-
-        \$slug = \$proposal = call_user_func($builder, \$this->get$fromFieldCamelized());
-
-$uniqueCode
-
-        \$this->set$slugFieldCamelized(\$slug);
-EOF
+        $this->processTemplate($this->definitions['document_base'],
+            file_get_contents(__DIR__.'/templates/SluggableDocument.php.twig')
         );
-        $this->definitions['document_base']->addMethod($method);
 
         // repository ->findOneBySlug()
         $method = new Method('public', 'findOneBySlug', '$slug', <<<EOF
@@ -122,5 +92,10 @@ EOF
 EOF
         );
         $this->definitions['repository_base']->addMethod($method);
+    }
+
+    protected function configureTwig(\Twig_Environment $twig)
+    {
+        $twig->addExtension(new MongatorTwig());
     }
 }
