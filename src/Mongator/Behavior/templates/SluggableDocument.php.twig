@@ -1,0 +1,33 @@
+<?php
+
+    protected function updateSluggableSlug()
+    {
+        if ( $this->get{{ options.slugField|ucfirst }}() !== null ) return true;
+        if ( $this->get{{ options.fromField|ucfirst }}() === null ) return true;
+
+        $slug = call_user_func({{ options.builder|var_export }}, $this->get{{ options.fromField|ucfirst }}());
+
+{% if options.unique %}
+        $slug = $this->getNewSlugIfBusy($slug);
+{% endif %}
+
+        $this->set{{ options.slugField|ucfirst }}($slug);
+    }
+
+    protected function getNewSlugIfBusy($proposal)
+    {
+        $slug = $proposal;
+
+        $similarSlugs = array();
+        $mongoRegExp = new \MongoRegex('/^'.$slug.'/');
+        foreach ($this->getRepository()->getCollection()->find(array('{{ options.slugField }}' => $mongoRegExp)) as $result) {
+            $similarSlugs[] = $result['{{ options.slugField }}'];
+        }
+
+        $i = 1;
+        while (in_array($slug, $similarSlugs)) {
+            $slug = $proposal . '-' . ++$i;
+        }
+
+        return $slug;
+    }
