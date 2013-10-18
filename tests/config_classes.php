@@ -339,6 +339,7 @@ return array(
         )
     ),
 
+    // Identifiable
     'Model\IdentifiableDocument' => array(
        'embeddedsOne' => array(
             'embOne' => array('class' => 'Model\Identifiable'),
@@ -370,6 +371,55 @@ return array(
                 'options' => array(
                     'idGeneratorMethod' => array(
                         'Mongator\Tests\Behavior\IdentifiableTest', 'generateId'
+                    )
+                ),
+            )
+        ),
+    ),
+
+    // Stringifiable
+    'Model\Stringifiable' => array(
+        'fields' => array(
+            'title' => 'string',
+            'content'  => 'string',
+            'note'     => 'string',
+            'line'     => 'string',
+            'text'     => 'string',
+            'isActive' => 'boolean',
+            'date'     => 'date',
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mongator\Behavior\Stringifiable',
+                'options' => array(
+                    'fromFields' => array(
+                        'title',
+                        'date' => 'Y-m-d\TH:i:sP'
+                    )
+                ),
+            )
+        ),
+    ),
+
+    'Model\StringifiableWithFormat' => array(
+        'fields' => array(
+            'title' => 'string',
+            'content'  => 'string',
+            'note'     => 'string',
+            'line'     => 'string',
+            'text'     => 'string',
+            'isActive' => 'boolean',
+            'date'     => 'date',
+        ),
+        'behaviors' => array(
+            array(
+                'class' => 'Mongator\Behavior\Stringifiable',
+                'options' => array(
+                    'format' => '%s/%s/%s',
+                    'fromFields' => array(
+                        'title',
+                        'note',
+                        'text'
                     )
                 ),
             )

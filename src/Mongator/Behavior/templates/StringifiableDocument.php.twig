@@ -1,0 +1,18 @@
+<?php
+
+    public function __toString()
+    {
+        $values = array();
+{% for field, format in options.fromFields %}
+{% if config_class.fields[field].type == 'date' and format %}
+        $values['{{ field }}'] = $this->get{{ field|ucfirst }}();
+        if ($values['{{ field }}']) {
+            $values['{{ field }}'] = $values['{{ field }}']->format('{{ format }}');
+        }
+{% else %}
+        $values['{{ field }}'] = trim((string) $this->get{{ field|ucfirst }}());
+{% endif %}
+{% endfor %}
+
+        return trim(vsprintf('{{ options.format|trim }}', $values));
+    }
