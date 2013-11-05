@@ -4,7 +4,7 @@
     {
         $values = array();
 {% for field, format in options.fromFields %}
-{% if config_class.fields[field].type == 'date' and format %}
+{% if field in config_class.fields|keys and config_class.fields[field].type == 'date' and format %}
         $values['{{ field }}'] = $this->get{{ field|ucfirst }}();
         if ($values['{{ field }}']) {
             $values['{{ field }}'] = $values['{{ field }}']->format('{{ format }}');
