@@ -397,6 +397,12 @@ return array(
                         'date' => 'Y-m-d\TH:i:sP'
                     )
                 ),
+            ),
+            array(
+                'class'   => 'Mongator\Behavior\Sluggable',
+                'options' => array(
+                    'fromToString' => true,
+                ),
             )
         ),
     ),

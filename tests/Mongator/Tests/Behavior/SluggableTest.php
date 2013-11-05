@@ -32,6 +32,18 @@ class SluggableTest extends TestCase
         $this->assertSame('testing-sluggable-extension-2', $documents[2]->getSlug());
     }
 
+    public function testSluggableFromToString()
+    {
+        $documents = array();
+
+        $documents[1] = $this->mongator->create('Model\Stringifiable');
+        $documents[1]->setTitle(' Testing Sluggable Extensión ');
+        $documents[1]->setDate(new \DateTime('2010-10-10'));
+        $documents[1]->save();
+
+        $this->assertSame('testing-sluggable-extension-2010-10-10t0000000200', $documents[1]->getSlug());
+    }
+
     public function testRepositoryFindBySlug()
     {
         $documents = array();

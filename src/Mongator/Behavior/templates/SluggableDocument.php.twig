@@ -3,7 +3,7 @@
     protected function updateSluggableSlug()
     {
         if ( $this->get{{ options.slugField|ucfirst }}() !== null ) return true;
-        if ( $this->get{{ options.fromField|ucfirst }}() === null ) return true;
+        if ( $this->generateSlug() == '' ) return true;
 
         $slug = $proposal = $this->generateSlug();
 
@@ -19,7 +19,13 @@
 
     protected function generateSlug()
     {
-        return call_user_func({{ options.builder|var_export }}, $this->get{{ options.fromField|ucfirst }}());
+{% if options.fromToString == true %}
+        $slug = (string) $this;
+{% else %}
+        $slug = $this->get{{ options.fromField|ucfirst }}();
+{% endif %}
+
+        return call_user_func({{ options.builder|var_export }}, $slug);
     }
 
 {% if options.unique %}

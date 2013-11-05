@@ -39,6 +39,7 @@ Options
 * ```slugClass``` (default 'null'): if unique is set to global, the name of the model name used to store the slugs
 * ```collection``` (default 'null'): if unique is set to global, the name of the collection where the slugs are stored
 * ```conection``` (default 'null'): if unique is set to global, the name of the conection used to storage the slugs
+* ```fromToString``` (default false): if true create the slug from the result of `__toString` method
             
 
 

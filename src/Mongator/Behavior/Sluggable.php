@@ -28,16 +28,16 @@ class Sluggable extends ClassExtension
      */
     protected function setUp()
     {
-        $this->addRequiredOption('fromField');
-
         $this->addOptions(array(
+            'fromField' => null,
             'slugField' => 'slug',
             'unique'    => 'local',
             'update'    => false,
             'builder'   => array('\Mongator\Behavior\Util\SluggableUtil', 'slugify'),
             'collection' => null,
             'conection' => null,
-            'slugClass' => null
+            'slugClass' => null,
+            'fromToString' => null
         ));
     }
 
