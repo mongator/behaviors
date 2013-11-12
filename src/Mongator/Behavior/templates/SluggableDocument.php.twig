@@ -51,9 +51,16 @@
         if ( $this->get{{ options.slugField|ucfirst }}() === null ) return true;
         if ( $this->slugExists($this->get{{ options.slugField|ucfirst }}()) ) return true;
 
+        $slugDocument = $this->createSlugDocument();
+        $slugDocument->save();
+    }
+
+    protected function createSlugDocument()
+    {
         $slugDocument = $this->getMongator()->create('{{ options.slugClass }}');
         $slugDocument->setSlug($this->get{{ options.slugField|ucfirst }}());
         $slugDocument->setDocument($this);
-        $slugDocument->save();
+
+        return $slugDocument;
     }
 {% endif %}
