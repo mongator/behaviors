@@ -3,7 +3,7 @@
 /*
  * This file is part of Mongator.
  *
- * (c) Pablo Díez <pablodip@gmail.com>
+ * (c) Máximo Cuadros <mcuadros@gmail.com>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -17,7 +17,7 @@ use Mandango\Mondator\Definition\Method;
 /**
  * Tokenizable.
  *
- * @author Pablo Díez <pablodip@gmail.com>
+ * @author Máximo Cuadros <mcuadros@gmail.com>
  */
 class Tokenizable extends ClassExtension
 {
@@ -53,7 +53,7 @@ class Tokenizable extends ClassExtension
         $this->configClass['fields'][$field] = array('type' => 'string');
 
         // index
-        $this->configClass['indexes'][] = array('keys' => array($field => 1), array('unique' => 1));
+        $this->configClass['indexes'][] = array('keys' => array($field => 1), 'options' => array('unique' => 1));
 
         // event
         $fieldSetter = 'set'.ucfirst($field);
