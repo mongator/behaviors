@@ -1,5 +1,5 @@
 composer.lock
 phpunit.xml
-/tests/Model/Base/
+/tests/Model/
 /tests/Model/Mapping/
 /vendor/
