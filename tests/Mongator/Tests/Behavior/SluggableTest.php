@@ -57,10 +57,10 @@ class SluggableTest extends TestCase
 
     public function stringsProvider()
     {
-        return [
-            [' Testing Sluggable Extensión ', 'testing-sluggable-extension'],
-            ['i’ll be your girl', 'ill-be-your-girl']
-        ];
+        return array (
+            array (' Testing Sluggable Extensión ', 'testing-sluggable-extension'),
+            array ('i’ll be your girl', 'ill-be-your-girl')
+        );
     }
 
     public function testRepositoryFindBySlug()
