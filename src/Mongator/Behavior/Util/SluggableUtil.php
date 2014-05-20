@@ -165,7 +165,10 @@ class SluggableUtil
             // Euro Sign
             chr(226).chr(130).chr(172) => 'E',
             // GBP (Pound) Sign
-            chr(194).chr(163) => '');
+            chr(194).chr(163) => '',
+            //Apostrophe
+            chr(226) => ''
+            );
 
             $string = strtr($string, $chars);
         } else {

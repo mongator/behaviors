@@ -11,6 +11,7 @@
 
 namespace Mondongo\Tests\Behavior;
 
+use Mongator\Behavior\Util\SluggableUtil;
 use Mongator\Tests\TestCase;
 
 class SluggableTest extends TestCase
@@ -32,7 +33,7 @@ class SluggableTest extends TestCase
         $this->assertSame('testing-sluggable-extension-2', $documents[2]->getSlug());
     }
 
-    public function testSluggableFromToString()
+    public function testSluggableFromToStringAndTime()
     {
         $documents = array();
 
@@ -42,6 +43,24 @@ class SluggableTest extends TestCase
         $documents[1]->save();
 
         $this->assertSame('testing-sluggable-extension-2005-08-15t1552010000', $documents[1]->getSlug());
+    }
+
+    /**
+     * @dataProvider stringsProvider
+     */
+    public function testSlugifyString($string, $slug)
+    {
+        $util = new SluggableUtil();
+
+        $this->assertEquals($slug, $util->slugify($string));
+    }
+
+    public function stringsProvider()
+    {
+        return [
+            [' Testing Sluggable Extensión ', 'testing-sluggable-extension'],
+            ['i’ll be your girl', 'ill-be-your-girl']
+        ];
     }
 
     public function testRepositoryFindBySlug()
