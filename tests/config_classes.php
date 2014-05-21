@@ -377,6 +377,24 @@ return array(
         ),
     ),
 
+    // EmbeddedUniquable
+    'Model\EmbeddedUniquable' => array(
+        'embeddedsMany' => array(
+            'foo' => array('class' => 'Model\Comment'),
+        ),
+        'behaviors' => array(
+            array(
+                'class'   => 'Mongator\Behavior\EmbeddedUniquable',
+                'options' => array(
+                    'fields' => [[
+                        'embeddedsMany' => 'foo', 
+                        'field' => 'title'
+                    ]],
+                ),
+            )
+        ),
+    ),
+
     // Stringifiable
     'Model\Stringifiable' => array(
         'fields' => array(

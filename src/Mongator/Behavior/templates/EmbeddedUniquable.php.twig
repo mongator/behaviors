@@ -1,0 +1,33 @@
+<?php
+    {% for field in options.fields %}
+
+    protected function ensure{{field.embeddedsMany|ucfirst}}Uniqueness()
+    {
+        $this->ensureEmbeddedUniqueness('{{field.embeddedsMany}}', '{{field.field}}');
+    }
+
+    {% endfor %}
+
+    protected function ensureEmbeddedUniqueness($field, $fieldId)
+    {
+        $objects = $this->get($field)->all();
+        $unique = $this->filterUniqueObjects($objects, $fieldId);
+        if (count($objects) != count($unique)) {
+            $this->get($field)->replace($unique);
+        }
+    }
+
+    private function filterUniqueObjects($objects, $field)
+    {
+        $unique = [];
+        $method = 'get' . ucfirst($field);
+        foreach ($objects as $object) {
+            $id = (string) $object->$method();
+            if (!isset($unique[$id])) {
+                $unique[$id] = $object;
+            }
+        }
+
+        return array_values($unique);
+    }
+

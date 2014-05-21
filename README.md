@@ -12,6 +12,7 @@ These are the official behaviors of Mongator.
 - [AutoIncrementable](doc/02_auto_incrementable.md): Auto incrementable field like [AUTO_INCREMENT](http://dev.mysql.com/doc/refman/5.0/en/example-auto-increment.html) in MySQL
 - [Identifiable](doc/08_identifiable.md): Automatically saves an identifier in the document. 
 - [Stringifiable](doc/09_stringifiable.md): Add to the document the magic method __toString, so any document can be converted to string.
+- [EmbeddedUniquable](doc/10_embeddeduniquable.md): Ensure unique embeddeds document in a embeddedsMany relation.
 
 Requirements
 ------------
@@ -29,7 +30,7 @@ You can see [package information on Packagist.](https://packagist.org/packages/m
 ```JSON
 {
     "require": {
-        "mongator/behaviors": "1.0.*"
+        "mongator/behaviors": "1.4.*"
     }
 }
 ```
