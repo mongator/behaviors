@@ -386,10 +386,10 @@ return array(
             array(
                 'class'   => 'Mongator\Behavior\EmbeddedUniquable',
                 'options' => array(
-                    'fields' => [[
+                    'fields' => array(array(
                         'embeddedsMany' => 'foo', 
                         'field' => 'title'
-                    ]],
+                    )),
                 ),
             )
         ),
